@@ -1,0 +1,60 @@
+.container {
+  margin: 2rem 1.7rem;
+}
+
+.arrow-icon {
+  margin-bottom: 1rem;
+  position: relative;
+  right: 10px;
+}
+
+.title {
+  font-family: "Pretendard";
+  font-size: 1.6rem;
+  line-height: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.input-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-item .input-label {
+  font-family: "Pretendard";
+  font-weight: bold;
+  color: #767676;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.input-item .input-style {
+  height: 2.5rem;
+  border: none;
+  border-bottom: 2px solid #f0f0f0;
+  margin-bottom: 1rem;
+  font-family: "Pretendard";
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.input-item .input-style::placeholder {
+  font-family: "Pretendard";
+  font-weight: 400;
+  font-size: 1rem;
+  color: #7d7d7d;
+}
+
+.signup-submit-button {
+  width: 100%;
+  height: 3rem;
+  margin-top: 2rem;
+  border-radius: 10px;
+  border: none;
+  background-color: #74da50;
+  font-family: "Pretendard";
+  font-weight: bold;
+  font-size: 1rem;
+  color: white;
+}
