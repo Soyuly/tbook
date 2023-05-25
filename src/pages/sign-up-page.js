@@ -1,11 +1,21 @@
 import React from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import "../assets/css/signup.css";
+import { signupInfoState } from "../store/signup-info";
 function SignUpPage() {
   const navigate = useNavigate();
 
+  const [signupInfo, setSignupInfo] = useRecoilState(signupInfoState);
   const handleBackArrowClick = () => navigate(-1);
+
+  function handleChange(event, fn) {
+    setSignupInfo((prevState) => ({
+      ...prevState,
+      [fn]: event.target.value,
+    }));
+  }
 
   return (
     <div className="container">
