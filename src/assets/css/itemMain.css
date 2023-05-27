@@ -1,0 +1,306 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+  margin-bottom: 1rem;
+}
+
+.logo {
+  float: left;
+}
+
+.logo a {
+  float: right;
+  cursor: pointer;
+  margin-right: 155px;
+}
+
+.logo a img {
+  width: 30px;
+  height: 20px;
+}
+
+.item_fileter_icon {
+  float: left;
+  color: #767676;
+}
+
+.item_filter_icon a {
+  margin-left: 100px;
+}
+
+.item_filter_icon a img {
+  width: 20px;
+  height: 18px;
+}
+
+.shopping_cart a {
+  margin-left: 20px;
+}
+
+.shopping_cart a img {
+  width: 20px;
+  height: 20px;
+}
+
+.madeBy_name {
+  font-family: "NanumSquareNeoLight"; /* 폰트 패밀리 이름 */
+  padding: 20px 20px 10px 20px;
+  margin-right: 21%;
+  margin-bottom: 0.5rem;
+}
+
+.container {
+  display: flex;
+  margin: 0;
+  margin-left: 18px;
+  flex-wrap: wrap;
+}
+
+.btns {
+  font-family: "NanumSquareNeoLight"; /* 폰트 패밀리 이름 */
+  font-size: 14px;
+  margin-right: 8px;
+  margin-bottom: 5px;
+  display: flex;
+  border: 1px solid #d7d7d7;
+  height: 2.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 1rem;
+  border-radius: 7px;
+}
+
+.btns > div {
+  display: inline-block;
+  width: fit-content;
+  height: 2.4rem;
+  margin-right: 7px;
+  padding: 0px 15px 0px 15px;
+  border-radius: 7px;
+
+  color: black;
+  line-height: 42px;
+  text-decoration: none;
+  border: 1px solid #d7d7d7;
+}
+
+.btns1 {
+  margin-left: 18px;
+  margin-top: 10px;
+}
+
+.btns1 > a {
+  display: inline-block;
+  width: fit-content;
+  padding: 0px 15px 0px 15px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: black;
+  line-height: 42px;
+  text-decoration: none;
+  border: solid 2px #d7d7d7;
+}
+
+.usage {
+  padding: 20px 20px 10px 20px;
+  margin-right: 22%;
+}
+
+.btns2 {
+  margin-left: 18px;
+}
+
+.btns2 > a {
+  display: inline-block;
+  width: fit-content;
+  padding: 0px 15px 0px 15px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: black;
+  line-height: 42px;
+  text-decoration: none;
+  border: solid 2px #d7d7d7;
+}
+
+.btns3 {
+  margin-left: 18px;
+  margin-top: 10px;
+}
+
+.btns3 > a {
+  display: inline-block;
+  width: fit-content;
+  padding: 0px 15px 0px 15px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: black;
+  line-height: 42px;
+  text-decoration: none;
+  border: solid 2px #d7d7d7;
+}
+
+.weight {
+  padding: 20px 20px 10px 20px;
+  margin-right: 22%;
+}
+
+.btns4 {
+  margin-left: 18px;
+}
+
+.btns4 > a {
+  display: inline-block;
+  width: fit-content;
+  padding: 0px 15px 0px 15px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: black;
+  line-height: 42px;
+  text-decoration: none;
+  border: solid 2px #d7d7d7;
+}
+
+.price_range {
+  padding: 20px 20px 10px 20px;
+  margin-right: 21%;
+}
+
+.btns5 {
+  margin-left: 18px;
+}
+
+.btns5 > a {
+  display: inline-block;
+  width: fit-content;
+  padding: 0px 15px 0px 15px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: black;
+  line-height: 42px;
+  text-decoration: none;
+  border: solid 2px #d7d7d7;
+}
+
+.btns6 {
+  margin-left: 18px;
+  padding-bottom: 15px;
+}
+
+.btns6 > a {
+  display: inline-block;
+  width: fit-content;
+  padding: 0px 15px 0px 15px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: black;
+  line-height: 42px;
+  text-decoration: none;
+  border: solid 2px #d7d7d7;
+  margin-top: 10px;
+}
+
+.changed {
+  color: white;
+  background-color: #74da50;
+  border: #74da50 2px solid;
+}
+
+.show {
+  opacity: 1;
+  transition: opacity 0.5s linear;
+}
+
+.hide {
+  opacity: 0;
+}
+
+#filter_container {
+  display: flex;
+  flex-direction: column;
+}
+
+#filter_body {
+  display: flex;
+
+  flex-direction: column;
+}
+
+.line1 {
+  display: flex;
+  justify-content: center;
+}
+
+.img1 {
+  margin-top: 10px;
+  margin-right: 18px;
+}
+
+.img2 {
+  margin-top: 10px;
+  margin-left: 18px;
+}
+
+.line1_title {
+  display: flex;
+  justify-content: center;
+}
+
+.img1_title {
+  margin-top: 10px;
+  font-weight: bold;
+  margin-right: 52px;
+}
+
+.img2_title {
+  margin-top: 10px;
+  font-weight: bold;
+  margin-left: 38px;
+}
+
+.divider {
+  width: 100%;
+  background-color: #f5f5f5;
+  height: 7px;
+  margin: 1rem 0;
+}
+
+.notebook-item {
+  width: 11rem;
+  height: 11rem;
+
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.3rem;
+}
+
+.notebook-image {
+  width: 11rem;
+  height: 10rem;
+  border: 0.5px solid rgba(0, 0, 0, 0.05);
+  object-fit: cover;
+  margin-bottom: 0.7rem;
+  border-radius: 14px;
+}
+
+.notebook-title {
+  font-family: "Pretendard";
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.notebook-container {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}

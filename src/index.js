@@ -4,9 +4,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import "./assets/css/init.css";
 import "./assets/css/reset.css";
+import AdditionalPage from "./pages/account/addtional-page";
+import LoginPage from "./pages/account/login-page";
+import SignUpPage from "./pages/account/sign-up-page";
 import AIModeSelectPage from "./pages/ai-mode-select-page";
-import LoginPage from "./pages/login-page";
-import SignUpPage from "./pages/sign-up-page";
+import MainPage from "./pages/main-page";
+import ItemDetailPage from "./pages/item-detail.page";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -14,9 +17,12 @@ root.render(
     <RecoilRoot>
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<MainPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup/oauth" element={<AdditionalPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/aimode" element={<AIModeSelectPage />} />
+          <Route path="/detail/:id" element={<ItemDetailPage />} />
         </Routes>
       </BrowserRouter>
     </RecoilRoot>

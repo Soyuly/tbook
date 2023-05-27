@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { socialLogin } from "../apis/social-login";
-import "../assets/css/login.css";
+import { socialLogin } from "../../apis/social-login-api";
+import "../../assets/css/login.css";
+import { setCookie } from "../../utils/cookie";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -13,12 +14,12 @@ function LoginPage() {
 
     if (code !== null) {
       socialLogin(localStorage.getItem("provider"), code)
-        .then((res) =>
-          console.log(
-            "JWT토큰 : ",
-            res.headers.getAuthorization().replace("Bearer ", "")
-          )
-        )
+        .then((res) => {
+          const token = res.headers.getAuthorization().replace("Bearer ", "");
+          setCookie("access_token", token);
+
+          navigate("/");
+        })
         .catch((err) => console.log(err));
     }
   }, []);
