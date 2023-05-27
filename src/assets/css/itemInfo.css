@@ -1,0 +1,224 @@
+.itemInfo_view {
+  margin: 0 auto;
+}
+
+.detail-header {
+  display: flex;
+  justify-content: flex-start;
+  margin: 0 2rem;
+  padding-top: 30px;
+}
+
+.back {
+  margin-right: 30px;
+}
+
+.back a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.back a img {
+  width: 18px;
+}
+
+.labtop-image {
+  height: 20rem;
+  object-fit: contain;
+}
+
+.item_title {
+  font-family: "NanumSquareNeoRegular";
+  float: left;
+  color: #767676;
+}
+
+.shopping_cart a img {
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  right: 0.7rem;
+}
+
+.item-image {
+  display: flex;
+  justify-content: center;
+}
+
+.item_script_container {
+  display: flex;
+  margin-left: 2rem;
+}
+
+.item_script {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+}
+
+.item_name {
+  font-family: "Pretendard";
+  font-size: 1.35rem;
+  font-weight: bold;
+  margin-bottom: 0.7rem;
+  margin-right: 70px;
+}
+
+.item_spec {
+  font-family: "NanumSquareNeoRegular";
+  margin-bottom: 8px;
+  color: #767676;
+  font-size: 12px;
+  margin-right: 100px;
+}
+
+.item_madeby {
+  font-family: "NanumSquareNeoRegular";
+  color: #767676;
+  font-size: 11px;
+  margin-right: 240px;
+}
+
+.caption {
+  font-family: "Pretendard";
+  margin: 10px 2rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: flex-start;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+caption {
+  display: none;
+}
+
+.vector_img {
+  margin-left: 3px;
+  display: inline-block;
+}
+
+.vector_description {
+  opacity: 0;
+  position: absolute;
+  color: black;
+  background-color: #ededed;
+  border-radius: 10px;
+  margin-left: 5px;
+  padding: 10px;
+}
+
+.showText {
+  opacity: 1;
+  transition: opacity 0.5s linear;
+}
+
+.hideText {
+  opacity: 0;
+}
+
+.table_Info {
+  display: flex;
+}
+
+.item_Info {
+  margin: 0 2rem;
+
+  font-size: 12px;
+  color: #767676;
+  margin-right: 5px;
+  border-collapse: separate;
+  border-spacing: 0 0.2rem;
+}
+
+.item_Info th {
+  font-family: "NanumSquareNeoBold";
+  font-weight: bold;
+  font-size: 0.9rem;
+  width: 100px;
+  padding: 5px;
+}
+
+.item_Info td {
+  font-family: "NanumSquareNeoRegular";
+}
+
+.price_info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin: 2rem 2rem 0 2rem;
+}
+
+.min_date {
+  font-family: "NanumSquareNeoLight";
+  font-size: 0.8rem;
+  color: #767676;
+  display: flex;
+  justify-content: center;
+  margin-left: 230px;
+  margin-bottom: 10px;
+}
+
+.detail-price {
+  font-family: "Pretendard";
+  font-weight: bold;
+  font-size: 1.8rem;
+}
+
+.btns {
+  text-align: center;
+}
+
+.btns > a {
+  display: inline-block;
+  width: 150px;
+  height: 40px;
+  border-radius: 2px;
+  font-size: 16px;
+  color: #fff;
+  line-height: 42px;
+  text-decoration: none;
+}
+
+.btns > a.btn1 {
+  background-color: black;
+  border-radius: 5px;
+}
+
+.btns > a.btn2 {
+  background-color: #74da50;
+  border-radius: 5px;
+}
+
+.detail-btn {
+  display: flex;
+  margin: 2rem 2rem;
+  justify-content: space-between;
+}
+
+.shop-add-btn {
+  width: 10rem;
+  height: 3rem;
+  background-color: black;
+  border-radius: 7px;
+  color: white;
+  font-family: "Pretendard";
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+}
+
+.order-add-btn {
+  width: 9.5rem;
+  height: 3rem;
+  background-color: #74da50;
+  border-radius: 7px;
+  color: white;
+  font-family: "Pretendard";
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+}
