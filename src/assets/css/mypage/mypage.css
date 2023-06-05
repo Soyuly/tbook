@@ -1,0 +1,58 @@
+.mypage {
+  padding-left: 20%;
+  padding-right: 20%;
+  /* fotter 하단 고정 */
+  height: auto;
+  min-height: 100%;
+  padding-bottom: 1vh;
+}
+
+@media screen and (min-width: 1224px) {
+  .mypage {
+    padding-left: 30% !important;
+    padding-right: 30% !important;
+  }
+}
+
+/* 1000보다이하 */
+@media screen and (max-width: 1224px) {
+  .mypage {
+    padding-left: 5% !important;
+    padding-right: 5% !important;
+  }
+}
+
+.user_info_container {
+  /* 16px */
+  padding-left: 1rem;
+  padding-right: 1rem;
+  display: flex;
+}
+
+.user_info-content {
+  font-weight: bold;
+}
+
+.user_info-email {
+  font-size: 10px;
+  margin-bottom: 0.3rem;
+}
+
+.user_info-name {
+  /* flex-direction 설정해줘야 했음*/
+  font-size: 25px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+.user_info-name > span {
+  font-size: 12px;
+}
+
+.user_info-logout-btn {
+  margin-left: auto;
+  font-size: 13px;
+  color: #989898;
+  cursor: pointer;
+}

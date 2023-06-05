@@ -1,0 +1,41 @@
+.payment_method {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 20px;
+  color: #4a4a4a;
+  font-size: 14px;
+  line-height: 23px;
+  margin-bottom: 6rem;
+}
+
+.payment_method > span {
+  margin-bottom: 14px;
+}
+
+.kakao_pay-image {
+  width: 77px;
+  height: 15px;
+  object-fit: cover;
+}
+
+.payment_method-kakao,
+.payment_method-generate {
+  margin-left: 27px;
+  margin-top: auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.payment_method-generate > span {
+  margin-left: 24px;
+  color: #000000;
+  text-align: start;
+}
+
+.payment_method input[type="radio"] {
+  vertical-align: bottom;
+  color: #8b8b8b;
+}

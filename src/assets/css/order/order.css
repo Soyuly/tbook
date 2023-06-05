@@ -1,0 +1,67 @@
+.order {
+  padding-left: 20%;
+  padding-right: 20%;
+  /* fotter 하단 고정 */
+  height: auto;
+  min-height: 100%;
+  padding-bottom: 1vh;
+}
+@media screen and (min-width: 1224px) {
+  .order {
+    padding-left: 30% !important;
+    padding-right: 30% !important;
+  }
+}
+
+/* 1000보다이하 */
+@media screen and (max-width: 1224px) {
+  .order {
+    padding-left: 5% !important;
+    padding-right: 5% !important;
+  }
+}
+
+.order_user-info .order_user-name_and_phone,
+.order_user-address {
+  margin-left: 0.313rem;
+  line-height: 29px;
+  color: #0c0c0c;
+}
+
+.order_user-info {
+  margin-bottom: 24px;
+}
+
+.order_user-info > span {
+  font-size: 14px;
+  color: #4a4a4a;
+  /* margin-bottom: 22px; */
+}
+
+.order_user-name_and_phone {
+  display: flex;
+  font-size: 12px;
+  margin-top: 22px;
+}
+
+.order_user-name_and_phone > span {
+  width: 20%;
+  /* justify-content: space-around; */
+}
+
+.order_user-name {
+  margin-left: 1.25rem;
+}
+
+.order_user-address {
+  font-size: 12px;
+  display: flex;
+}
+
+.order_user-address > span {
+  width: 20%;
+}
+
+.order_user-address-detail {
+  margin-left: 1.25rem;
+}

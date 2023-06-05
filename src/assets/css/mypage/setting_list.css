@@ -1,0 +1,36 @@
+.mypage_setting-list {
+  display: flex;
+  flex-direction: column;
+  padding-top: 0.063rem;
+  padding-left: 2.25rem;
+  padding-right: 2.25rem;
+}
+
+.mypage_setting-list > div ion-icon {
+  margin-left: auto;
+}
+
+.mypage_setting-list > div {
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+  padding-bottom: 16px;
+  border-bottom: 0.5px solid #cccccc;
+  cursor: pointer;
+}
+
+.mypage_setting-list > div > i {
+  width: 0.688rem;
+}
+
+.mypage_setting-list > div :not(i, ion-icon) {
+  margin-left: 15px;
+  vertical-align: middle;
+}
+
+.mypage_setting-withdrawal > i {
+  margin-left: 2px;
+}
+.mypage_setting-password > i {
+  margin-left: 2px;
+}

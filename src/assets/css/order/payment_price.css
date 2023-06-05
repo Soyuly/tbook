@@ -1,0 +1,42 @@
+.payment_price {
+  margin-top: 18px;
+  margin-bottom: 28px;
+}
+
+.payment_price-content {
+  width: 100%;
+  line-height: 32px;
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+  font-size: 12px;
+  color: #000000;
+}
+
+.payment_price-content > * > span {
+  float: right;
+}
+
+.payment_price-content > * {
+  margin-left: 14px;
+  margin-right: 20px;
+}
+
+.payment_price_title {
+  margin-bottom: 13px;
+  font-size: 14px;
+  color: #4a4a4a;
+}
+
+/* .payment_price :not(.payment_price_title, payment_price-total_item > span) {
+  margin-left: 14px;
+  line-height: 32px;
+  font-size: 12px;
+  color: #000000;
+  display: flex;
+  justify-content: space-between;
+}
+
+.payment_price :not(.payment_price_title) > span {
+  width: 20%;
+} */

@@ -1,0 +1,29 @@
+.expect_price-container {
+  border-top: 1px solid #d4d4d4;
+  /* padding: 18px 0px 0px 49px; */
+  padding-top: 18px;
+  margin: 0px 20px 0 20px;
+  width: 95%;
+  height: 20vh;
+
+  /* margin-top: 50px; */
+}
+
+.expect_price-title {
+  font-family: "Pretendard-Light";
+  color: #adadad;
+  font-size: 15px;
+}
+
+.total_price-container {
+  margin: 25px 0 0 14px;
+  line-height: 32px;
+}
+
+.total_price-item,
+.total_price-delivery,
+.total_price-payment {
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+}

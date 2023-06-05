@@ -1,14 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../assets/css/itemMain.css";
 import { RiAccountCircleLine } from "react-icons/ri";
 import { AiTwotoneFilter } from "react-icons/ai";
 import { AiTwotoneShopping } from "react-icons/ai";
 import { BsRobot } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import { getProducts } from "../apis/product/products";
 
 function MainPage(props) {
   const navigate = useNavigate();
   const [isShow, setIsShow] = useState(true);
+  const [products, setProducts] = useState([]);
+
+  /*
+   * PRODUCT 데이터 조회
+   */
+  useEffect(() => {
+    const response = getProducts();
+    response.then((rs) => {
+      setProducts(rs.data);
+    });
+  }, []);
 
   const handleFilterButtonClick = () => setIsShow(!isShow);
 
@@ -38,7 +50,8 @@ function MainPage(props) {
               />
               <AiTwotoneShopping
                 className="shopping_cart"
-                onClick={() => navigate("/filter")}
+                style={{ cursor: "pointer" }}
+                onClick={() => navigate("/cart")}
               />
             </div>
           </div>
@@ -87,35 +100,22 @@ function MainPage(props) {
         )}
 
         <div className="notebook-container">
-          <div className="notebook-item">
-            <img
-              src="assets/item/itemImage1.png"
-              className="notebook-image"
-              alt="item1"
-            />
-            <div className="notebook-title">XPS 15</div>
-          </div>
-
-          <div className="notebook-item">
-            <img
-              src="assets/item/itemImage2.png"
-              className="notebook-image"
-              alt="item1"
-            />
-            <div className="notebook-title">ROG 제피러스</div>
-          </div>
-
-          <div className="notebook-item">
-            <img
-              src="assets/item/itemImage1.png"
-              className="notebook-image"
-              alt="item1"
-            />
-            <div className="notebook-title">XPS 15</div>
-          </div>
+          {products.map((product) => (
+            <div className="notebook-item" style={{ cursor: "pointer" }}>
+              <div key={product.productId}>
+                <img
+                  src={product.productImage}
+                  alt={product.productName}
+                  className="notebook-image"
+                />
+                <div className="notebook-title">{product.productName}</div>
+              </div>
+            </div>
+          ))}
         </div>
+      </div>
 
-        {/* <div className="line1">
+      {/* <div className="line1">
           <div className="img1">
             <a href="#">
               <img src="assets/item/itemImage1.png" alt="item1" />
@@ -131,7 +131,6 @@ function MainPage(props) {
           <div className="img1_title">[DELL] XPS 15</div>
           <div className="img2_title">[ASUS] ROG 제퍼러스</div>
         </div> */}
-      </div>
     </>
   );
 }
