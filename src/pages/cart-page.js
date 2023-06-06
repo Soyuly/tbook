@@ -92,7 +92,7 @@ function CartPage() {
           />
         )}
 
-        <span>전체선택</span>
+        <span className="all-select-style">전체선택</span>
         <div className="cart-all-item-count">
           {checkedItems.length} / {items.length}
         </div>

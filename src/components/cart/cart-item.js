@@ -54,7 +54,9 @@ function CartItem({ item, onCountChange, checked, onCheckChange }) {
           </div>
           <div className="cart_item-release">{item.name}</div>
           <div className="cart_item-release">{item.release}</div>
-          <div className="cart_item-price">{item.price}&nbsp;원</div>
+          <div className="cart_item-price">
+            {item.price && item.price.toLocaleString()}&nbsp;원
+          </div>
         </div>
 
         <div className="cart_item_count">

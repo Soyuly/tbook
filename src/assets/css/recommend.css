@@ -45,6 +45,12 @@
   height: 70vh;
 }
 
+.notebok-recommend-image {
+  width: 70%;
+  height: 20rem;
+  object-fit: contain;
+}
+
 .mainSlidePage {
   border: 1px solid #ececec;
   width: 100%;
@@ -84,3 +90,26 @@
   font-size: 1.3rem;
 }
 
+.loading-bar-container {
+  width: 100%;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-bar-text {
+  margin-top: 0.1rem;
+  font-family: "NanumSquareNeoRegular";
+  font-size: 1.2rem;
+  color: #74da50;
+}
+
+.similiality-text {
+  font-family: "NanumSquareNeoRegular";
+  font-size: 1rem;
+  color: #74da50;
+  position: relative;
+  top: 20px;
+}

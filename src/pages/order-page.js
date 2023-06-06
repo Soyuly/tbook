@@ -10,6 +10,7 @@ import orderState from "../store/order/order";
 import totalPaymentAmountState from "../store/order/total-payment";
 import "../assets/css/common/app_bar.css";
 import AppBar from "../components/common/app-bar.js";
+import { onPaymentButtonClick } from "./payment";
 
 function OrderPage() {
   const [order, setOrder] = useRecoilState(orderState);
@@ -25,7 +26,7 @@ function OrderPage() {
   };
 
   const handlePaymentButtonClick = () => {
-    getOrderInfo();
+    onPaymentButtonClick(order.paymentMethod, 2, 200, "테스트 제품");
   };
 
   const handlePaymentMethodChange = (method) => {
@@ -41,12 +42,12 @@ function OrderPage() {
       </header>
 
       <div className="order_user-info">
-        <span>주문자 정보</span>
+        <span className="order-person-style">주문자 정보</span>
         <div className="order_user-name_and_phone">
-          <span>성명 · 연락처</span>
-          <div className="order_user-name">{order.userInfo.name}</div>
-          &nbsp; &nbsp;
-          <div className="order_user-phone">{order.userInfo.phone}</div>
+          <span>성명·연락처</span>
+          <div className="order_user-name">
+            {order.userInfo.name} / {order.userInfo.phone}
+          </div>
         </div>
         <div className="order_user-address">
           <span>주소</span>
@@ -55,6 +56,8 @@ function OrderPage() {
           </div>
         </div>
       </div>
+
+      <div className="order-divider" />
 
       <div className="seperate-box"></div>
 
@@ -65,13 +68,13 @@ function OrderPage() {
             {order.orderItems.length}개
           </div>
         </div>
+
         <div className="order_item-list">
           {order.orderItems.map((item, index) => (
             <div key={index} className="order_item">
               <div className="order_item-name">{item.name}</div>
 
               <div className="order_item-count">
-                {" "}
                 &nbsp;&nbsp;/&nbsp;{item.count}개
               </div>
             </div>
@@ -79,7 +82,7 @@ function OrderPage() {
         </div>
       </div>
 
-      <div className="seperate-box"></div>
+      <div className="order-divider" />
 
       <div className="payment_price">
         <div className="payment_price_title">결제 금액</div>
@@ -108,7 +111,7 @@ function OrderPage() {
         </div>
       </div>
 
-      <div className="seperate-box"></div>
+      <div className="order-divider" />
 
       <div className="payment_method">
         <span>결제 수단</span>
@@ -118,11 +121,11 @@ function OrderPage() {
             type="radio"
             name="payment_method"
             value="kakao"
-            checked={order.paymentMethod === "kakao"}
-            onChange={() => handlePaymentMethodChange("kakao")}
+            checked={order.paymentMethod === "kakaopay"}
+            onChange={() => handlePaymentMethodChange("kakaopay")}
           />
           <img
-            src="assets/order/kakao_pay.png"
+            src="/assets/item/kakao_pay3.png"
             alt=""
             className="kakao_pay-image"
           ></img>
@@ -133,8 +136,8 @@ function OrderPage() {
             type="radio"
             name="payment_method"
             value="general"
-            checked={order.paymentMethod === "general"}
-            onChange={() => handlePaymentMethodChange("general")}
+            checked={order.paymentMethod === "kcp"}
+            onChange={() => handlePaymentMethodChange("kcp")}
           />
           <span>일반 결제</span>
         </label>

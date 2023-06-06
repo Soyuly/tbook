@@ -9,7 +9,8 @@
 }
 
 .app_bar > div {
-  font-size: 18px;
+  font-family: "NanumSquareNeoLight";
+  font-size: 19px;
   color: #090a0a;
   margin-right: auto;
   flex-direction: column;

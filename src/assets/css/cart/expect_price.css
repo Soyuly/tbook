@@ -2,7 +2,7 @@
   border-top: 1px solid #d4d4d4;
   /* padding: 18px 0px 0px 49px; */
   padding-top: 18px;
-  margin: 0px 20px 0 20px;
+  margin: 0px 20px 0 0;
   width: 95%;
   height: 20vh;
 
@@ -10,9 +10,9 @@
 }
 
 .expect_price-title {
-  font-family: "Pretendard-Light";
+  font-family: "NanumSquareNeoLight";
   color: #adadad;
-  font-size: 15px;
+  font-size: 1.1rem;
 }
 
 .total_price-container {
@@ -23,7 +23,8 @@
 .total_price-item,
 .total_price-delivery,
 .total_price-payment {
-  font-size: 14px;
+  font-family: "NanumSquareNeoLight";
+  font-size: 0.9rem;
   display: flex;
   justify-content: space-between;
 }

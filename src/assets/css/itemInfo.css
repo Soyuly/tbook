@@ -122,7 +122,8 @@ caption {
 }
 
 .item_Info {
-  margin: 0 2rem;
+  width: 100vw;
+  margin: 0 2rem !important;
 
   font-size: 12px;
   color: #767676;
@@ -137,6 +138,7 @@ caption {
   font-size: 0.9rem;
   width: 100px;
   padding: 5px;
+  line-height: 1.2rem;
 }
 
 .item_Info td {

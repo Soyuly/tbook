@@ -6,17 +6,21 @@
   color: #4a4a4a;
   font-size: 14px;
   line-height: 23px;
-  margin-bottom: 6rem;
+  margin-bottom: 2rem;
 }
 
 .payment_method > span {
+  font-family: "NanumSquareNeoLight";
+  font-size: 1rem;
   margin-bottom: 14px;
 }
 
 .kakao_pay-image {
-  width: 77px;
-  height: 15px;
+  width: 4.5rem;
+  height: 2.5rem;
+  border-radius: 15px;
   object-fit: cover;
+  margin-left: 20px;
 }
 
 .payment_method-kakao,
@@ -30,6 +34,7 @@
 }
 
 .payment_method-generate > span {
+  font-family: "NanumSquareNeoLight";
   margin-left: 24px;
   color: #000000;
   text-align: start;

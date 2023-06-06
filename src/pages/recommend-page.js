@@ -1,13 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../assets/css/recommend.css";
 import { useSwipeable } from "react-swipeable";
 import { useState } from "react";
+import { productRecommendApi } from "../apis/product-recommend";
+import { useNavigate } from "react-router-dom";
+import { SyncLoader } from "react-spinners";
+
 function RecommendPage(props) {
+  const navigate = useNavigate();
   const [current, setCurrent] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [aiResults, setAiResults] = useState([
+    {
+      product_id: 0,
+      product_image: "",
+      product_name: "",
+      similarity: 0,
+    },
+  ]);
 
   function handleLeftSwipe() {
-    console.log(test.length);
-    if (current + 1 < test.length) setCurrent(current + 1);
+    console.log(aiResults.length);
+    if (current + 1 < aiResults.length) setCurrent(current + 1);
   }
 
   function handleRightSwipe() {
@@ -19,20 +33,28 @@ function RecommendPage(props) {
     onSwipedRight: () => handleRightSwipe(),
   });
 
-  const test = [
-    "LG전자 2022 그램15(12세대)",
-    "삼성 노트북 이온2",
-    "HP X13",
-    "HP 스펙터",
-    "맥북 프로",
-  ];
+  useEffect(() => {
+    const visitedList = JSON.parse(localStorage.getItem("visited")) || ["1"];
+    const intVisitedList = visitedList.map((str) => parseInt(str, 10));
+
+    productRecommendApi(intVisitedList)
+      .then((res) => {
+        setAiResults(res.data);
+        setLoading(false);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <div>
       <div className="recommend-header">
         <div className="headerUp">
           <div className="preButton">
-            <img src="/assets/item/Left Actionable.png" alt="이전버튼" />
+            <img
+              src="/assets/item/Left Actionable.png"
+              alt="이전버튼"
+              onClick={() => navigate(-1)}
+            />
           </div>
         </div>
       </div>
@@ -42,27 +64,49 @@ function RecommendPage(props) {
         추천🎵
       </div>
 
-      <div className="mainPage">
-        <div className="mainSlidePage" {...handlers}>
-          <div className="imageWrapper">
-            <img
-              src="/assets/item/item-image.png"
-              alt="노트북"
-              className="notebok-recommend-image"
-            />
+      {loading && (
+        <div className="loading-bar-container">
+          <div style={{ marginBottom: "2rem" }}>
+            <SyncLoader color="#74da50" loading={loading} />
           </div>
-          <div className="imageTextWrapper">{test[current]}</div>
+          <div className="loading-bar-text">트북이가 당신한테 맞는</div>
+          <div className="loading-bar-text">노트북을 추천하고 있어요</div>
         </div>
+      )}
 
-        <div className="progressBar">
-          {test.map((item, index) => (
+      {!loading && (
+        <div className="mainPage">
+          <div className="mainSlidePage" {...handlers}>
             <div
-              className={current === index ? "circle light" : "circle"}
-              key={index}
-            ></div>
-          ))}
+              className="imageWrapper"
+              onClick={() =>
+                navigate("/detail/" + aiResults[current].product_id)
+              }
+            >
+              <img
+                src={aiResults[current].product_image}
+                alt="노트북"
+                className="notebok-recommend-image"
+              />
+            </div>
+            <div className="imageTextWrapper">
+              {aiResults[current].product_name}
+            </div>
+            <div class="similiality-text">
+              추천 정확도 {aiResults[current].similarity}%
+            </div>
+          </div>
+
+          <div className="progressBar">
+            {aiResults.map((result, index) => (
+              <div
+                className={current === index ? "circle light" : "circle"}
+                key={index}
+              ></div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
