@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import "../assets/css/itemMain.css";
 import { RiAccountCircleLine } from "react-icons/ri";
-import { AiTwotoneFilter } from "react-icons/ai";
+import { AiTwotoneFilter, AiOutlineFilter } from "react-icons/ai";
 import { AiTwotoneShopping } from "react-icons/ai";
 import { BsRobot } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
@@ -12,18 +12,31 @@ import { MADE_BY, PRICE, WEIGHT } from "../utils/spec";
 
 function MainPage(props) {
   const navigate = useNavigate();
+  // 필터 화면에 보이는지 여부
   const [isShow, setIsShow] = useState(true);
+
+  // 실제 노트북 제품 정보들
   const [products, setProducts] = useState([]);
+
+  // 무한 스크롤 구현을 위한 변수
   const [ref, inView] = useInView();
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(0);
 
+  // 필터에 각 버튼이 선택되어 있는지 나타내는 상태변수
   const [selectedWeightButton, setSelectedWeightButton] = useState(null);
   const [selectedPriceButton, setSelectedPriceButton] = useState(null);
   const [selectedMadeByButtons, setSelectedMadeByButtons] = useState([]);
 
+  // 필터 클릭
+  const handleFilterButtonClick = () => setIsShow(!isShow);
+
+  /**
+   * 제조사를 클릭하면, 해당 제조사가 선택돼서 필터링 됨
+   */
   const handleMadeByButtonClick = (madeBy) => {
     setPage(0);
+
     if (selectedMadeByButtons.includes(madeBy)) {
       // 이미 선택된 버튼일 경우 선택 해제
       setSelectedMadeByButtons(
@@ -35,10 +48,16 @@ function MainPage(props) {
     }
   };
 
+  /**
+   * 해당 제조사가 사용자가 눌렀는지 확인하는 변수
+   */
   const isMadeByButtonSelected = (madeBy) => {
     return selectedMadeByButtons.includes(madeBy);
   };
 
+  /**
+   * 노트북 무게 선택
+   */
   const handleWeightClick = (weight) => {
     setPage(0);
 
@@ -48,6 +67,9 @@ function MainPage(props) {
     setSelectedWeightButton(weight);
   };
 
+  /**
+   *  노트북 가격 선택
+   */
   const handlePriceButtonClick = (price) => {
     setPage(0);
 
@@ -67,13 +89,20 @@ function MainPage(props) {
       selectedMadeByButtons,
       selectedPriceButton,
       selectedWeightButton
-    ).then((res) => {
-      setProducts((prevState) => [...prevState, ...res.data.content]);
-    });
+    )
+      .then((res) => {
+        if (res) {
+          setProducts((prevState) => [...prevState, ...res.data.content]);
+        }
+      })
+      .catch((err) => console.log(err));
 
     setLoading(false);
   }, [page]);
 
+  /**
+   * 필터를 클릭했을 때 서버쪽에 요청을 보내는 함수
+   */
   async function getItemsWithOption() {
     await getProductsByFilter(
       page,
@@ -81,7 +110,9 @@ function MainPage(props) {
       selectedPriceButton,
       selectedWeightButton
     ).then((res) => {
-      setProducts((prevState) => [...res.data.content]);
+      if (res) {
+        setProducts((prevState) => [...res.data.content]);
+      }
     });
   }
 
@@ -93,13 +124,14 @@ function MainPage(props) {
     getItemsWithOption();
   }, [selectedMadeByButtons, selectedPriceButton, selectedWeightButton]);
 
+  /**
+   * 무한 스크롤을 구현
+   */
   useEffect(() => {
     if (inView && !loading && page < 44) {
       setPage((prevState) => prevState + 1);
     }
   }, [inView, loading]);
-
-  const handleFilterButtonClick = () => setIsShow(!isShow);
 
   return (
     <>
@@ -121,10 +153,18 @@ function MainPage(props) {
                 className="item_filter_icon"
                 onClick={() => navigate("/login")}
               />
-              <AiTwotoneFilter
-                className="item_filter_icon"
-                onClick={handleFilterButtonClick}
-              />
+              {isShow ? (
+                <AiTwotoneFilter
+                  className="item_filter_icon"
+                  onClick={handleFilterButtonClick}
+                />
+              ) : (
+                <AiOutlineFilter
+                  className="item_filter_icon"
+                  onClick={handleFilterButtonClick}
+                />
+              )}
+
               <AiTwotoneShopping
                 className="shopping_cart"
                 style={{ cursor: "pointer" }}
@@ -193,51 +233,57 @@ function MainPage(props) {
         )}
 
         <div className="notebook-container">
-          {products.map((item, index) => (
-            <>
-              {products.length - 1 == index ? (
-                <div
-                  className="notebook-item"
-                  style={{ cursor: "pointer" }}
-                  key={index}
-                  onClick={() => navigate("/detail/" + item.id)}
-                >
-                  <div ref={ref}>
-                    <img
-                      src={item.productImage}
-                      alt={item.productName}
-                      className="notebook-image"
-                    />
-                    <div className="notebook-title">{item.productName}</div>
-                    <div className="notebook-price">
-                      {item.productPrice && item.productPrice.toLocaleString()}
-                      원
+          {products.length > 0 ? (
+            products.map((item, index) => (
+              <>
+                {products.length - 1 == index ? (
+                  <div
+                    className="notebook-item"
+                    style={{ cursor: "pointer" }}
+                    key={index}
+                    onClick={() => navigate("/detail/" + item.id)}
+                  >
+                    <div ref={ref}>
+                      <img
+                        src={item.productImage}
+                        alt={item.productName}
+                        className="notebook-image"
+                      />
+                      <div className="notebook-title">{item.productName}</div>
+                      <div className="notebook-price">
+                        {item.productPrice &&
+                          item.productPrice.toLocaleString()}
+                        원
+                      </div>
                     </div>
                   </div>
-                </div>
-              ) : (
-                <div
-                  className="notebook-item"
-                  style={{ cursor: "pointer" }}
-                  key={index}
-                  onClick={() => navigate("/detail/" + item.id)}
-                >
-                  <div>
-                    <img
-                      src={item.productImage}
-                      alt={item.productName}
-                      className="notebook-image"
-                    />
-                    <div className="notebook-title">{item.productName}</div>
-                    <div className="notebook-price">
-                      {item.productPrice && item.productPrice.toLocaleString()}
-                      원
+                ) : (
+                  <div
+                    className="notebook-item"
+                    style={{ cursor: "pointer" }}
+                    key={index}
+                    onClick={() => navigate("/detail/" + item.id)}
+                  >
+                    <div>
+                      <img
+                        src={item.productImage}
+                        alt={item.productName}
+                        className="notebook-image"
+                      />
+                      <div className="notebook-title">{item.productName}</div>
+                      <div className="notebook-price">
+                        {item.productPrice &&
+                          item.productPrice.toLocaleString()}
+                        원
+                      </div>
                     </div>
                   </div>
-                </div>
-              )}
-            </>
-          ))}
+                )}
+              </>
+            ))
+          ) : (
+            <>해당하는 노트북이 없습니다.</>
+          )}
         </div>
       </div>
     </>

@@ -97,6 +97,10 @@ function RecommendPage(props) {
             </div>
           </div>
 
+          <div className="recommend-hint-text">
+            트북이가 자랑하는 추천 알고리즘을 통해 결과를 제공합니다:)
+          </div>
+
           <div className="progressBar">
             {aiResults.map((result, index) => (
               <div

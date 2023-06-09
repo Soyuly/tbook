@@ -100,6 +100,7 @@ caption {
 
 .vector_description {
   opacity: 0;
+  font-size: 0.8rem;
   position: absolute;
   color: black;
   background-color: #ededed;
@@ -135,7 +136,7 @@ caption {
 .item_Info th {
   font-family: "NanumSquareNeoBold";
   font-weight: bold;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   width: 100px;
   padding: 5px;
   line-height: 1.2rem;

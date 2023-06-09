@@ -113,3 +113,10 @@
   position: relative;
   top: 20px;
 }
+
+.recommend-hint-text {
+  font-family: "NanumSquareNeoRegular";
+  margin-top: 10px;
+  font-size: 0.7rem;
+  color: #767676;
+}
