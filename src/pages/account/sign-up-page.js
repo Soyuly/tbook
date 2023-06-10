@@ -28,9 +28,10 @@ function SignUpPage() {
     if (validation()) {
       signup(signupInfo)
         .then((res) => {
-          console.log(res);
+          navigate("/login");
         })
         .catch((err) => {
+          console.log(err);
           console.log("에러", err.response.data.msg);
           alert(err.response.data.msg);
         });
