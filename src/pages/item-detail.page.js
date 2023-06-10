@@ -4,6 +4,9 @@ import { getProductsById } from "../apis/product/get-products-by-id";
 import { useNavigate, useParams } from "react-router-dom";
 import { PowerOutline } from "react-ionicons";
 import { onPaymentButtonClick } from "./payment";
+import Modal from "react-modal";
+import ProductDetailModal from "../components/product-detail/modal/product-detail-modal";
+// import { addProductCart } from "../apis/cart/add-product-cart";
 
 function ItemDetailPage() {
   const navigate = useNavigate();
@@ -11,6 +14,7 @@ function ItemDetailPage() {
   const visitedList = JSON.parse(localStorage.getItem("visited")) || [];
   const [activeDescription, setActiveDescription] = useState(null);
   const { id } = useParams();
+  const [isOpen, setIsOpen] = useState(false);
 
   /**
    * 현재 날짜 가져오기
@@ -51,6 +55,15 @@ function ItemDetailPage() {
       return setActiveDescription(null);
     }
     setActiveDescription(id);
+  };
+
+  const handleModalClick = () => {
+    setIsOpen(true);
+
+    // addProductCart(productId).then((res) => console.log(res));
+  };
+  const handleClose = () => {
+    setIsOpen(false);
   };
 
   const getDescriptionStyle = (id) => {
@@ -207,7 +220,9 @@ function ItemDetailPage() {
           </h3>
         </div>
         <div className="detail-btn">
-          <button className="shop-add-btn">장바구니 담기</button>
+          <button className="shop-add-btn" onClick={handleModalClick()}>
+            장바구니 담기
+          </button>
           <button
             className="order-add-btn"
             onClick={() =>
@@ -220,6 +235,7 @@ function ItemDetailPage() {
           >
             구매하기
           </button>
+          <ProductDetailModal isOpen={isOpen} onClose={handleClose} />
         </div>
       </div>
     </>

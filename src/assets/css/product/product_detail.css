@@ -1,0 +1,36 @@
+.product-cart-modal-button {
+  margin-top: 3rem;
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.product-cart-modal-title {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 0.6rem;
+}
+.product-cart-modal-title > span {
+  margin-bottom: 0.2rem;
+}
+
+.product-cart-modal-button > div {
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "Pretendard";
+  font-size: 0.97rem;
+}
+
+.product-cart-modal-button-close {
+  border: 1px solid gray;
+  padding: 9px 15px 9px 15px;
+}
+
+.product-cart-modal-button-to-cart {
+  color: white;
+  border: 1px solid green;
+  background-color: green;
+  margin-left: 2rem;
+  padding: 9px 25px 9px 25px;
+}

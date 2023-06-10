@@ -139,7 +139,7 @@ function MainPage(props) {
         <div className="header">
           <div className="logo">
             <img
-              src="assets/item/logo.png"
+              src="/assets/item/logo.png"
               alt="트북이 로고"
               className="main-logo-image"
             />
