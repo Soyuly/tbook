@@ -6,7 +6,7 @@ import { PowerOutline } from "react-ionicons";
 import { onPaymentButtonClick } from "./payment";
 import Modal from "react-modal";
 import ProductDetailModal from "../components/product-detail/modal/product-detail-modal";
-// import { addProductCart } from "../apis/cart/add-product-cart";
+import { addProductCart } from "../apis/cart/add-product-cart";
 
 function ItemDetailPage() {
   const navigate = useNavigate();
@@ -15,6 +15,12 @@ function ItemDetailPage() {
   const [activeDescription, setActiveDescription] = useState(null);
   const { id } = useParams();
   const [isOpen, setIsOpen] = useState(false);
+  const [cartLink, setCartLink] = useState("");
+
+  //TODO userId
+  useEffect(() => {
+    setCartLink("/cart" + 1);
+  }, []);
 
   /**
    * 현재 날짜 가져오기
@@ -57,10 +63,10 @@ function ItemDetailPage() {
     setActiveDescription(id);
   };
 
-  const handleModalClick = () => {
+  const handleModalClick = (productId) => {
     setIsOpen(true);
 
-    // addProductCart(productId).then((res) => console.log(res));
+    addProductCart(1, productId).then((res) => console.log(res));
   };
   const handleClose = () => {
     setIsOpen(false);
@@ -79,15 +85,16 @@ function ItemDetailPage() {
           <div className="back">
             <a onClick={() => navigate("/")}>
               <img
-                src="/assets/item/Left Actionable.png"
+                src="/assets/item/left_actionable.png"
                 alt="뒤로가기"
                 onClick={() => navigate("/")}
               />
             </a>
           </div>
+          {/* TODO userId */}
           <div className="item_title">{product.productName}</div>
           <div className="shopping_cart">
-            <a href="#">
+            <a href={"/cart/" + 1}>
               <img src="/assets/item/shopping_cart.png" alt="장바구니" />
             </a>
           </div>
@@ -220,7 +227,10 @@ function ItemDetailPage() {
           </h3>
         </div>
         <div className="detail-btn">
-          <button className="shop-add-btn" onClick={handleModalClick()}>
+          <button
+            className="shop-add-btn"
+            onClick={() => handleModalClick(product.productId)}
+          >
             장바구니 담기
           </button>
           <button

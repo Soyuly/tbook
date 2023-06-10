@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import "../assets/css/order/index.css";
 import "../assets/css/order/order_item_list.css";
@@ -11,10 +11,13 @@ import totalPaymentAmountState from "../store/order/total-payment";
 import "../assets/css/common/app_bar.css";
 import AppBar from "../components/common/app-bar.js";
 import { onPaymentButtonClick } from "./payment";
+import purchaseInfoState from "../store/order/purchaseInfoState";
 
 function OrderPage() {
-  const [order, setOrder] = useRecoilState(orderState);
+  // const [order, setOrder] = useRecoilState(orderState);
+  const [order, setOrder] = useRecoilState(purchaseInfoState);
   const totalPaymentAmount = useRecoilValue(totalPaymentAmountState);
+  // const purchaseInfo = useRecoilValue(purchaseInfoState);
 
   const getOrderInfo = () => {
     const orderInfo = {
@@ -33,11 +36,21 @@ function OrderPage() {
     setOrder((prevOrder) => ({ ...prevOrder, paymentMethod: method }));
   };
 
+  // useEffect(() => {
+  //   if (purchaseInfo) {
+  //     setOrder(purchaseInfo);
+  //   }
+  // }, [purchaseInfo]);
+
   return (
     <div className="order">
       <header>
         <hgroup>
-          <AppBar appBarName={"주문 / 결제"} navigateTo={"/cart"}></AppBar>
+          {/* TODO userId */}
+          <AppBar
+            appBarName={"주문 / 결제"}
+            navigateTo={"/cart/" + "1"}
+          ></AppBar>
         </hgroup>
       </header>
 
@@ -46,13 +59,15 @@ function OrderPage() {
         <div className="order_user-name_and_phone">
           <span>성명·연락처</span>
           <div className="order_user-name">
-            {order.userInfo.name} / {order.userInfo.phone}
+            {/* {order.userInfo.name} / {order.userInfo.phone} */}
+            홍길동 / 010-1234-1234
           </div>
         </div>
         <div className="order_user-address">
           <span>주소</span>
           <div className="order_user-address-detail">
-            {order.userInfo.address}
+            {/* {order.userInfo.address} */}
+            진주시 테스트
           </div>
         </div>
       </div>
@@ -65,17 +80,17 @@ function OrderPage() {
         <div className="order_item-title">
           <span>주문 상품</span>
           <div className="order_item-title-total-count">
-            {order.orderItems.length}개
+            {order.items.length}개
           </div>
         </div>
 
         <div className="order_item-list">
-          {order.orderItems.map((item, index) => (
+          {order.items.map((item, index) => (
             <div key={index} className="order_item">
-              <div className="order_item-name">{item.name}</div>
+              <div className="order_item-name">{item.productName}</div>
 
               <div className="order_item-count">
-                &nbsp;&nbsp;/&nbsp;{item.count}개
+                &nbsp;&nbsp;/&nbsp;{item.quantity}개
               </div>
             </div>
           ))}
@@ -91,21 +106,21 @@ function OrderPage() {
             총 상품 금액
             <span>원</span>
             <span className="payment_price-total_item">
-              {order.totalProductAmount.toLocaleString()}
+              {order.totalPrice.toLocaleString()}
             </span>
           </div>
           <div className="payment_price-total_delivery-container">
             총 배송비
             <span>원</span>
             <span className="payment_price-total_delivery">
-              {order.totalShippingCost.toLocaleString()}
+              {order.deliveryPrice.toLocaleString()}
             </span>
           </div>
           <div className="payment_price-total-container">
             총 결제 금액
             <span>원</span>
             <span className="payment_price-total">
-              {totalPaymentAmount.toLocaleString()}
+              {order.finalPrice.toLocaleString()}
             </span>
           </div>
         </div>

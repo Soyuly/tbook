@@ -30,7 +30,7 @@ root.render(
           <Route path="/recommend" element={<RecommendPage />} />
           <Route path="/detail/:id" element={<ItemDetailPage />} />
           <Route path="/filter" element={<AiFilterPage />} />
-          <Route path="/cart" element={<CartPage />} />
+          <Route path="/cart/:userId" element={<CartPage />} />
           <Route path="/order" element={<OrderPage />} />
           <Route path="/mypage" element={<MyPage />} />
         </Routes>
