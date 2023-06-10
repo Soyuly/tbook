@@ -33,6 +33,7 @@ function ItemDetailPage() {
   };
 
   useEffect(() => {
+    console.log("받아오기");
     getProductsById(id)
       .then((res) => {
         setProduct(res.data);
@@ -220,7 +221,7 @@ function ItemDetailPage() {
           </h3>
         </div>
         <div className="detail-btn">
-          <button className="shop-add-btn" onClick={handleModalClick()}>
+          <button className="shop-add-btn" onClick={() => handleModalClick()}>
             장바구니 담기
           </button>
           <button
