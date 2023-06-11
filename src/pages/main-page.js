@@ -169,7 +169,7 @@ function MainPage(props) {
               <AiTwotoneShopping
                 className="shopping_cart"
                 style={{ cursor: "pointer" }}
-                onClick={() => navigate("/cart" + "1")}
+                // onClick={() => navigate("/cart/" + "1")}
               />
             </div>
           </div>

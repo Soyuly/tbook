@@ -20,8 +20,6 @@ function OrderPage() {
       ...order,
       totalPaymentAmount,
     };
-
-    console.log(orderInfo);
   };
 
   const handlePaymentButtonClick = () => {

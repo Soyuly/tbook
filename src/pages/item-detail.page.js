@@ -3,10 +3,11 @@ import "../assets/css/itemInfo.css";
 import { getProductsById } from "../apis/product/get-products-by-id";
 import { useNavigate, useParams } from "react-router-dom";
 import { PowerOutline } from "react-ionicons";
-import { onPaymentButtonClick } from "./payment";
+
 import Modal from "react-modal";
 import ProductDetailModal from "../components/product-detail/modal/product-detail-modal";
 import { addProductCart } from "../apis/cart/add-product-cart";
+import { onPaymentButtonClick } from "../utils/payment";
 
 function ItemDetailPage() {
   const navigate = useNavigate();
@@ -18,9 +19,9 @@ function ItemDetailPage() {
   const [cartLink, setCartLink] = useState("");
 
   //TODO userId
-  useEffect(() => {
-    setCartLink("/cart" + 1);
-  }, []);
+  // useEffect(() => {
+  //   // setCartLink("/cart" + 1);
+  // }, []);
 
   /**
    * 현재 날짜 가져오기
@@ -94,7 +95,7 @@ function ItemDetailPage() {
           {/* TODO userId */}
           <div className="item_title">{product.productName}</div>
           <div className="shopping_cart">
-            <a href={"/cart/" + 1}>
+            <a href={"/cart/" + "1"}>
               <img src="/assets/item/shopping_cart.png" alt="장바구니" />
             </a>
           </div>
@@ -235,13 +236,13 @@ function ItemDetailPage() {
           </button>
           <button
             className="order-add-btn"
-            onClick={() =>
-              onPaymentButtonClick(
-                product.productId,
-                product.productPrice,
-                product.productName
-              )
-            }
+            // onClick={() =>
+            //   onPaymentButtonClick(
+            //     product.productId,
+            //     product.productPrice,
+            //     product.productName
+            //   )
+            // }
           >
             구매하기
           </button>

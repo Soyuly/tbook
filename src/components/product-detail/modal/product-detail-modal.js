@@ -1,12 +1,13 @@
 // src/ShoppingCartModal.js
 import React from "react";
 import Modal from "react-modal";
-
+import { useNavigate } from "react-router-dom";
 import "../../../assets/css/product/product_detail.css";
 
 Modal.setAppElement("#root");
 
 function ProductDetailModal({ isOpen, onClose }) {
+  const navigate = useNavigate();
   return (
     <Modal
       isOpen={isOpen}
@@ -30,7 +31,11 @@ function ProductDetailModal({ isOpen, onClose }) {
         <div className="product-cart-modal-button-close" onClick={onClose}>
           닫기
         </div>
-        <div className="product-cart-modal-button-to-cart" onClick={onClose}>
+        {/* TODO userId */}
+        <div
+          className="product-cart-modal-button-to-cart"
+          onClick={() => navigate("/cart/" + "1")}
+        >
           장바구니로 가기
         </div>
       </div>

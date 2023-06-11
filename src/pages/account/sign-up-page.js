@@ -38,7 +38,6 @@ function SignUpPage() {
   }
 
   function validation() {
-    console.log(confirmPasswordRef);
     if (signupInfo.password !== confirmPasswordRef.current.value) {
       alert("비밀번호가 일치하지않습니다. 다시 확인해주세요.");
       return false;

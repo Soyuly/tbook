@@ -10,13 +10,16 @@ import orderState from "../store/order/order";
 import totalPaymentAmountState from "../store/order/total-payment";
 import "../assets/css/common/app_bar.css";
 import AppBar from "../components/common/app-bar.js";
-import { onPaymentButtonClick } from "./payment";
+import { useNavigate } from "react-router-dom";
+
 import purchaseInfoState from "../store/order/purchaseInfoState";
+import { onPaymentButtonClick } from "../utils/payment";
 
 function OrderPage() {
   // const [order, setOrder] = useRecoilState(orderState);
   const [order, setOrder] = useRecoilState(purchaseInfoState);
   const totalPaymentAmount = useRecoilValue(totalPaymentAmountState);
+  const navigate = useNavigate();
   // const purchaseInfo = useRecoilValue(purchaseInfoState);
 
   const getOrderInfo = () => {
@@ -28,12 +31,22 @@ function OrderPage() {
     console.log(orderInfo);
   };
 
-  const handlePaymentButtonClick = () => {
-    onPaymentButtonClick(order.paymentMethod, 2, 200, "테스트 제품");
-  };
-
   const handlePaymentMethodChange = (method) => {
     setOrder((prevOrder) => ({ ...prevOrder, paymentMethod: method }));
+  };
+
+  const handlePaymentButtonClick = async () => {
+    const paymentSuccessful = await onPaymentButtonClick(
+      order.paymentMethod,
+      Math.floor(Math.random() * 100000) + 1,
+      200,
+      "테스트 제품",
+      order
+    );
+
+    if (paymentSuccessful) {
+      navigate("/");
+    }
   };
 
   // useEffect(() => {

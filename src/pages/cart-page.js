@@ -10,6 +10,7 @@ import { getProductCartByUserId } from "../apis/cart/get-cart-info-by-userId";
 import purchaseInfoState from "../store/order/purchaseInfoState";
 import { useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
+import { deleteCartItem } from "../apis/cart/delete-cart-item";
 
 function CartPage() {
   const [checkedItems, setCheckedItems] = useState([]);
@@ -26,6 +27,20 @@ function CartPage() {
       setItems(res.data.list);
     });
   }, []);
+
+  useEffect(() => {
+    setItems(items);
+  }, [items]);
+
+  // 아이템 삭제 핸들러
+  const handleItemDelete = async (cartId) => {
+    try {
+      await deleteCartItem(cartId); // deleteCartItem 함수를 호출하여 카트 아이템 삭제 API를 실행합니다.
+      setItems(items.filter((item) => item.cartId !== cartId)); // 삭제된 아이템을 제외한 새로운 아이템 목록을 설정합니다.
+    } catch (error) {
+      console.error("카트 아이템 삭제에 실패했습니다.", error);
+    }
+  };
 
   // 수량 변경 핸들러
   const handleItemCountChange = (productId, newCount) => {
@@ -50,6 +65,7 @@ function CartPage() {
       finalPrice: totalPrice + delieveryPrice,
     };
 
+    console.log(purchaseInfo);
     setPurchaseInfo(purchaseInfo);
     navigate("/order");
   }
@@ -118,6 +134,7 @@ function CartPage() {
             onCountChange={handleItemCountChange}
             checked={checkedItems.includes(item.productId)}
             onCheckChange={handleItemCheckChange}
+            onDelete={handleItemDelete}
           />
         ))}
       </div>

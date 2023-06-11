@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { BsCheckSquareFill, BsCheckSquare } from "react-icons/bs";
+import { CloseOutline } from "react-ionicons";
 
-function CartItem({ item, onCountChange, checked, onCheckChange }) {
+function CartItem({ item, onCountChange, checked, onCheckChange, onDelete }) {
   const handleCheckboxClick = () => {
     onCheckChange(item.productId, !checked);
   };
@@ -16,6 +17,10 @@ function CartItem({ item, onCountChange, checked, onCheckChange }) {
     if (item.quantity < 99) {
       onCountChange(item.productId, item.quantity + 1);
     }
+  };
+
+  const handleDelete = () => {
+    onDelete(item.cartId); // deleteCartItem 로직을 호출하여 카트 아이템 삭제
   };
 
   return (
@@ -34,8 +39,18 @@ function CartItem({ item, onCountChange, checked, onCheckChange }) {
             onClick={handleCheckboxClick}
           />
         )}
+
         <div className="cart_item-title-text">{item.productName}</div>
-        <ion-icon name="close-outline" className="cart_item-cancel"></ion-icon>
+        <CloseOutline
+          color={"#00000"}
+          title={""}
+          height="22px"
+          className="cart_item-cancel"
+          width="20px"
+          onClick={() => handleDelete(item.cartId)}
+        />
+
+        {/* <IonIcon name="close-outline" className="cart_item-cancel"></IonIcon> */}
       </div>
       <div className="cart_item-content-wrapper">
         <img
