@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { BsCheckSquareFill, BsCheckSquare } from "react-icons/bs";
 import { CloseOutline } from "react-ionicons";
+import { decreasementCartItemQuantity } from "../../apis/cart/decreasement-cart-item-quantity";
+import { incrementCartItemQuantity } from "../../apis/cart/increment-cart-item-quantity";
 
 function CartItem({ item, onCountChange, checked, onCheckChange, onDelete }) {
   const handleCheckboxClick = () => {
@@ -10,12 +12,14 @@ function CartItem({ item, onCountChange, checked, onCheckChange, onDelete }) {
   const handleMinusClick = () => {
     if (item.quantity > 1) {
       onCountChange(item.productId, item.quantity - 1);
+      decreasementCartItemQuantity(item.cartId);
     }
   };
 
   const handlePlusClick = () => {
     if (item.quantity < 99) {
       onCountChange(item.productId, item.quantity + 1);
+      incrementCartItemQuantity(item.cartId);
     }
   };
 

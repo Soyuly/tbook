@@ -36,7 +36,14 @@ function CartPage() {
   const handleItemDelete = async (cartId) => {
     try {
       await deleteCartItem(cartId); // deleteCartItem 함수를 호출하여 카트 아이템 삭제 API를 실행합니다.
-      setItems(items.filter((item) => item.cartId !== cartId)); // 삭제된 아이템을 제외한 새로운 아이템 목록을 설정합니다.
+      const newItems = items.filter((item) => item.cartId !== cartId); // 삭제된 아이템을 제외한 새로운 아이템 목록을 설정합니다.
+      setItems(newItems);
+      // 선택된 아이템 목록 업데이트
+      setCheckedItems(
+        checkedItems.filter((itemProductId) =>
+          newItems.some((item) => item.productId === itemProductId)
+        )
+      );
     } catch (error) {
       console.error("카트 아이템 삭제에 실패했습니다.", error);
     }
@@ -56,6 +63,12 @@ function CartPage() {
     const checkedItemsInfo = items.filter((item) =>
       checkedItems.includes(item.productId)
     );
+
+    // 선택된 상품이 없을 경우 alert 띄우기
+    if (checkedItemsInfo.length === 0) {
+      alert("상품을 선택해주세요");
+      return;
+    }
 
     // 모든 정보를 하나의 객체로 모음
     const purchaseInfo = {

@@ -20,6 +20,10 @@ function OrderPage() {
   const [order, setOrder] = useRecoilState(purchaseInfoState);
   const totalPaymentAmount = useRecoilValue(totalPaymentAmountState);
   const navigate = useNavigate();
+  const totalQuantity = order.items.reduce(
+    (sum, item) => sum + item.quantity,
+    0
+  );
   // const purchaseInfo = useRecoilValue(purchaseInfoState);
 
   const getOrderInfo = () => {
@@ -93,7 +97,7 @@ function OrderPage() {
         <div className="order_item-title">
           <span>주문 상품</span>
           <div className="order_item-title-total-count">
-            {order.items.length}개
+            총 {totalQuantity}개
           </div>
         </div>
 
