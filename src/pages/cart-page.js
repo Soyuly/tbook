@@ -64,7 +64,7 @@ function CartPage() {
       checkedItems.includes(item.productId)
     );
 
-    // 선택된 상품이 없을 경우 alert 띄우기
+    // 선택된 상품이 없을 경우 alert 띄움
     if (checkedItemsInfo.length === 0) {
       alert("상품을 선택해주세요");
       return;
@@ -80,7 +80,7 @@ function CartPage() {
 
     console.log(purchaseInfo);
     setPurchaseInfo(purchaseInfo);
-    navigate("/order");
+    navigate("/orders");
   }
 
   const handleItemCheckChange = (productId, checked) => {

@@ -2,12 +2,12 @@ import axios from "axios";
 
 const ORDER_API_URL = process.env.REACT_APP_ORDER_API_URL;
 
-export async function createItemOrder(userId, order) {
+export async function createSingleItemOrder(userId, order) {
   try {
-    const response = await axios.post(`${ORDER_API_URL}/${userId}/orders`, {
-      items: order.items,
-      paymentMethod: order.paymentMethod,
-    });
+    const response = await axios.post(
+      `${ORDER_API_URL}/${userId}/order`,
+      order
+    );
 
     return response;
   } catch (error) {

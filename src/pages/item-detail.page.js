@@ -8,6 +8,8 @@ import Modal from "react-modal";
 import ProductDetailModal from "../components/product-detail/modal/product-detail-modal";
 import { addProductCart } from "../apis/cart/add-product-cart";
 import { onPaymentButtonClick } from "../utils/payment";
+import { useSetRecoilState } from "recoil";
+import purshaseSingleInfoState from "../store/order/purshaseSingleInfoState";
 
 function ItemDetailPage() {
   const navigate = useNavigate();
@@ -17,6 +19,7 @@ function ItemDetailPage() {
   const { id } = useParams();
   const [isOpen, setIsOpen] = useState(false);
   const [cartLink, setCartLink] = useState("");
+  const setPurchaseSingleInfo = useSetRecoilState(purshaseSingleInfoState);
 
   //TODO userId
   // useEffect(() => {
@@ -37,6 +40,19 @@ function ItemDetailPage() {
 
   const descriptionStyle = {
     opacity: 0.7,
+  };
+
+  const handleSinglePurchase = () => {
+    const purchaseSingleInfo = {
+      productId: product.productId,
+      productName: product.productName,
+      quantity: 1,
+      unitPrice: product.productPrice,
+    };
+
+    setPurchaseSingleInfo(purchaseSingleInfo);
+    console.log(purchaseSingleInfo);
+    navigate("/order");
   };
 
   useEffect(() => {
@@ -236,6 +252,8 @@ function ItemDetailPage() {
           </button>
           <button
             className="order-add-btn"
+            onClick={() => handleSinglePurchase()}
+
             // onClick={() =>
             //   onPaymentButtonClick(
             //     product.productId,

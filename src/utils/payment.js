@@ -1,7 +1,15 @@
 import { createItemOrder } from "../apis/order/create-item-order";
+import { createSingleItemOrder } from "../apis/order/create-single-item-order";
 
 const IAMPORT_IDENTITY_CODE = process.env.REACT_APP_IAMPORT_IDENTITY_CODE;
-export const onPaymentButtonClick = (pg, orderId, price, title, items) => {
+export const onPaymentButtonClick = (
+  pg,
+  orderId,
+  price,
+  title,
+  items,
+  orderType
+) => {
   return new Promise((resolve) => {
     /* 1. 가맹점 식별하기 */
     const { IMP } = window;
@@ -26,15 +34,28 @@ export const onPaymentButtonClick = (pg, orderId, price, title, items) => {
     IMP.request_pay(data, (response) => {
       const { success, error_msg } = response;
       if (success) {
-        createItemOrder(1, items)
-          .then(() => {
-            alert("결제 성공");
-            resolve(true);
-          })
-          .catch((error) => {
-            alert("주문 생성 실패");
-            resolve(false);
-          });
+        // orderType에 따라 적절한 API 호출
+        if (orderType === "single") {
+          createSingleItemOrder(1, items)
+            .then(() => {
+              alert("결제 성공");
+              resolve(true);
+            })
+            .catch((error) => {
+              alert("단일 상품 주문 생성 실패");
+              resolve(false);
+            });
+        } else if (orderType === "multiple") {
+          createItemOrder(1, items)
+            .then(() => {
+              alert("결제 성공");
+              resolve(true);
+            })
+            .catch((error) => {
+              alert("주문 생성 실패");
+              resolve(false);
+            });
+        }
       } else {
         alert(`결제 실패: ${error_msg}`);
         resolve(false);
