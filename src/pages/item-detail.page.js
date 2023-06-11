@@ -56,6 +56,7 @@ function ItemDetailPage() {
   };
 
   useEffect(() => {
+    console.log("받아오기");
     getProductsById(id)
       .then((res) => {
         setProduct(res.data);

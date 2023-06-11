@@ -1,11 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { socialLogin } from "../../apis/social-login-api";
 import "../../assets/css/login.css";
 import { setCookie } from "../../utils/cookie";
+import { loginApi } from "../../apis/login-api";
 
 function LoginPage() {
   const navigate = useNavigate();
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
 
   useEffect(() => {
     const queryString = window.location.search;
@@ -15,8 +20,12 @@ function LoginPage() {
     if (code !== null) {
       socialLogin(localStorage.getItem("provider"), code)
         .then((res) => {
+          console.log(res.data);
           const token = res.headers.getAuthorization().replace("Bearer ", "");
           setCookie("access_token", token);
+
+          // 로컬 스토리지에 저장
+          localStorage.setItem("userId", res.data.id);
 
           navigate("/");
         })
@@ -60,6 +69,29 @@ function LoginPage() {
     );
   }
 
+  async function login() {
+    await loginApi(user)
+      .then((res) => {
+        const token = res.headers.getAuthorization().replace("Bearer ", "");
+        setCookie("access_token", token);
+
+        // 로컬 스토리지에 저장
+        localStorage.setItem("userId", res.data.id);
+
+        navigate("/");
+      })
+      .catch((err) => {
+        alert("아이디 또는 비밀번호가 잘못됐습니다.");
+      });
+  }
+
+  function handleChange(event, fn) {
+    setUser((prevState) => ({
+      ...prevState,
+      [fn]: event.target.value,
+    }));
+  }
+
   return (
     <div className="login-container">
       <div className="signup-button-container">
@@ -81,12 +113,24 @@ function LoginPage() {
           트북이의 더 많은 혜택과 정보를 얻으시려면
           <br /> 로그인이 필요합니다.
         </p>
-        <form action="#" method="POST">
+        <div>
           {/* 아이디 입력 */}
-          <input type="text" placeholder="email" className="login-input" />
+          <input
+            type="text"
+            placeholder="email"
+            className="login-input"
+            value={user.email}
+            onChange={(event) => handleChange(event, "email")}
+          />
 
           {/* 비밀번호 입력 */}
-          <input type="text" placeholder="password" className="login-input" />
+          <input
+            type="password"
+            placeholder="password"
+            className="login-input"
+            value={user.password}
+            onChange={(event) => handleChange(event, "password")}
+          />
 
           <div className="find-password-container">
             <a href="#" className="find-password">
@@ -94,10 +138,10 @@ function LoginPage() {
             </a>
           </div>
 
-          <button type="submit" className="submit-button">
+          <button type="submit" className="submit-button" onClick={login}>
             로그인
           </button>
-        </form>
+        </div>
 
         <div className="social-login-container">
           {/* 카카오로그인 */}

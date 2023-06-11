@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import "../assets/css/itemMain.css";
 import { RiAccountCircleLine } from "react-icons/ri";
+import { BiLogOut } from "react-icons/bi";
 import { AiTwotoneFilter, AiOutlineFilter } from "react-icons/ai";
 import { AiTwotoneShopping } from "react-icons/ai";
 import { BsRobot } from "react-icons/bs";
@@ -9,6 +10,7 @@ import { getProducts } from "../apis/product/products";
 import { useInView } from "react-intersection-observer";
 import { getProductsByFilter } from "../apis/product/get-products-by-filter";
 import { MADE_BY, PRICE, WEIGHT } from "../utils/spec";
+import { getCookie, removeCookie } from "../utils/cookie";
 
 function MainPage(props) {
   const navigate = useNavigate();
@@ -149,10 +151,22 @@ function MainPage(props) {
                 className="item_filter_icon"
                 onClick={() => navigate("/recommend")}
               />
-              <RiAccountCircleLine
-                className="item_filter_icon"
-                onClick={() => navigate("/login")}
-              />
+
+              {!getCookie("access_token") ? (
+                <RiAccountCircleLine
+                  className="item_filter_icon"
+                  onClick={() => navigate("/login")}
+                />
+              ) : (
+                <BiLogOut
+                  className="item_filter_icon"
+                  onClick={() => {
+                    removeCookie("access_token");
+                    window.location.reload();
+                  }}
+                />
+              )}
+
               {isShow ? (
                 <AiTwotoneFilter
                   className="item_filter_icon"
