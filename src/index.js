@@ -15,6 +15,7 @@ import RecommendPage from "./pages/recommend-page";
 import CartPage from "./pages/cart-page";
 import OrderPage from "./pages/order-page";
 import MyPage from "./pages/my-page";
+import OrderSinglePage from "./pages/order-single";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -30,8 +31,9 @@ root.render(
           <Route path="/recommend" element={<RecommendPage />} />
           <Route path="/detail/:id" element={<ItemDetailPage />} />
           <Route path="/filter" element={<AiFilterPage />} />
-          <Route path="/cart" element={<CartPage />} />
-          <Route path="/order" element={<OrderPage />} />
+          <Route path="/cart/:userId" element={<CartPage />} />
+          <Route path="/orders" element={<OrderPage />} />
+          <Route path="/order" element={<OrderSinglePage />} />
           <Route path="/mypage" element={<MyPage />} />
         </Routes>
       </BrowserRouter>

@@ -12,28 +12,24 @@ import "../assets/css/common/app_bar.css";
 import AppBar from "../components/common/app-bar.js";
 import { useNavigate } from "react-router-dom";
 
-import purchaseInfoState from "../store/order/purchaseInfoState";
 import { onPaymentButtonClick } from "../utils/payment";
+import purshaseSingleInfoState from "../store/order/purshaseSingleInfoState";
 
-function OrderPage() {
+function OrderSinglePage() {
   // const [order, setOrder] = useRecoilState(orderState);
-  const [order, setOrder] = useRecoilState(purchaseInfoState);
-  const totalPaymentAmount = useRecoilValue(totalPaymentAmountState);
+  const [order, setOrder] = useRecoilState(purshaseSingleInfoState);
+  //   const totalPaymentAmount = useRecoilValue(totalPaymentAmountState);
   const navigate = useNavigate();
-  const totalQuantity = order.items.reduce(
-    (sum, item) => sum + item.quantity,
-    0
-  );
   // const purchaseInfo = useRecoilValue(purchaseInfoState);
 
-  const getOrderInfo = () => {
-    const orderInfo = {
-      ...order,
-      totalPaymentAmount,
-    };
+  //   const getOrderInfo = () => {
+  //     const orderInfo = {
+  //       ...order,
+  //       totalPaymentAmount,
+  //     };
 
-    console.log(orderInfo);
-  };
+  //     console.log(orderInfo);
+  //   };
 
   const handlePaymentMethodChange = (method) => {
     setOrder((prevOrder) => ({ ...prevOrder, paymentMethod: method }));
@@ -46,7 +42,7 @@ function OrderPage() {
       200,
       "테스트 제품",
       order,
-      "multiple"
+      "single"
     );
 
     if (paymentSuccessful) {
@@ -54,21 +50,12 @@ function OrderPage() {
     }
   };
 
-  // useEffect(() => {
-  //   if (purchaseInfo) {
-  //     setOrder(purchaseInfo);
-  //   }
-  // }, [purchaseInfo]);
-
   return (
     <div className="order">
       <header>
         <hgroup>
           {/* TODO userId */}
-          <AppBar
-            appBarName={"주문 / 결제"}
-            navigateTo={"/cart/" + "1"}
-          ></AppBar>
+          <AppBar appBarName={"주문 / 결제"} navigateTo={"/"}></AppBar>
         </hgroup>
       </header>
 
@@ -97,21 +84,16 @@ function OrderPage() {
       <div className="order_item-container">
         <div className="order_item-title">
           <span>주문 상품</span>
-          <div className="order_item-title-total-count">
-            총 {totalQuantity}개
-          </div>
         </div>
 
         <div className="order_item-list">
-          {order.items.map((item, index) => (
-            <div key={index} className="order_item">
-              <div className="order_item-name">{item.productName}</div>
+          <div key={order.productId} className="order_item">
+            <div className="order_item-name">{order.productName}</div>
 
-              <div className="order_item-count">
-                &nbsp;&nbsp;/&nbsp;{item.quantity}개
-              </div>
+            <div className="order_item-count">
+              &nbsp;&nbsp;/&nbsp;{order.quantity}개
             </div>
-          ))}
+          </div>
         </div>
       </div>
 
@@ -124,21 +106,19 @@ function OrderPage() {
             총 상품 금액
             <span>원</span>
             <span className="payment_price-total_item">
-              {order.totalPrice.toLocaleString()}
+              {order.unitPrice.toLocaleString()}
             </span>
           </div>
           <div className="payment_price-total_delivery-container">
             총 배송비
             <span>원</span>
-            <span className="payment_price-total_delivery">
-              {order.deliveryPrice.toLocaleString()}
-            </span>
+            <span className="payment_price-total_delivery">2500</span>
           </div>
           <div className="payment_price-total-container">
             총 결제 금액
             <span>원</span>
             <span className="payment_price-total">
-              {order.finalPrice.toLocaleString()}
+              {(order.unitPrice + 2500).toLocaleString()}
             </span>
           </div>
         </div>
@@ -185,4 +165,4 @@ function OrderPage() {
   );
 }
 
-export default OrderPage;
+export default OrderSinglePage;

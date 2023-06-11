@@ -9,6 +9,6 @@ export async function addProductCart(userId, productId) {
     });
     return response;
   } catch (error) {
-    console.error("제품 정보를 가져오는데 실패했습니다.", error);
+    console.error("장바구니 추가에 실패했습니다.", error);
   }
 }

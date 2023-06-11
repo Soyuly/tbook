@@ -179,10 +179,11 @@ function MainPage(props) {
                 />
               )}
 
+              {/* //TODO userId */}
               <AiTwotoneShopping
                 className="shopping_cart"
                 style={{ cursor: "pointer" }}
-                onClick={() => navigate("/cart")}
+                // onClick={() => navigate("/cart/" + "1")}
               />
             </div>
           </div>

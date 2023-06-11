@@ -6,58 +6,90 @@ import TotalPrice from "../components/cart/total-price";
 import PurchaseButton from "../components/cart/purchase-button";
 import { BsCheckSquareFill, BsCheckSquare } from "react-icons/bs";
 import AppBar from "../components/common/app-bar";
+import { getProductCartByUserId } from "../apis/cart/get-cart-info-by-userId";
+import purchaseInfoState from "../store/order/purchaseInfoState";
+import { useSetRecoilState } from "recoil";
+import { useNavigate } from "react-router-dom";
+import { deleteCartItem } from "../apis/cart/delete-cart-item";
 
 function CartPage() {
   const [checkedItems, setCheckedItems] = useState([]);
   const [isAllChecked, setIsAllChecked] = useState(false);
+  const [items, setItems] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [delieveryPrice, setDelieveryPrice] = useState(2500);
+  const setPurchaseInfo = useSetRecoilState(purchaseInfoState);
+  const navigate = useNavigate();
 
-  const [items, setItems] = useState([
-    {
-      id: 1,
-      title: "LG전자 2022 그램15(12세대)",
-      company: "LG",
-      price: 1341350,
-      count: 1,
-      imgSrc:
-        "https://cdn.shopify.com/s/files/1/0471/6039/3896/products/Macbook_Pro_M1_iStockBD2.png?v=1647169869&width=600",
-    },
-    {
-      id: 2,
-      title: "LG전자 2022 그램15(12세대)",
-      company: "LG",
-      price: 1341350,
-      count: 1,
-      imgSrc:
-        "https://cdn.shopify.com/s/files/1/0471/6039/3896/products/Macbook_Pro_M1_iStockBD2.png?v=1647169869&width=600",
-    },
-    {
-      id: 3,
-      title: "LG전자 2022 그램15(12세대)",
-      company: "LG",
-      price: 1341350,
-      count: 1,
-      imgSrc:
-        "https://cdn.shopify.com/s/files/1/0471/6039/3896/products/Macbook_Pro_M1_iStockBD2.png?v=1647169869&width=600",
-    },
-  ]);
+  useEffect(() => {
+    getProductCartByUserId(1).then((res) => {
+      console.log(res.data.list);
+      setItems(res.data.list);
+    });
+  }, []);
+
+  useEffect(() => {
+    setItems(items);
+  }, [items]);
+
+  // 아이템 삭제 핸들러
+  const handleItemDelete = async (cartId) => {
+    try {
+      await deleteCartItem(cartId); // deleteCartItem 함수를 호출하여 카트 아이템 삭제 API를 실행합니다.
+      const newItems = items.filter((item) => item.cartId !== cartId); // 삭제된 아이템을 제외한 새로운 아이템 목록을 설정합니다.
+      setItems(newItems);
+      // 선택된 아이템 목록 업데이트
+      setCheckedItems(
+        checkedItems.filter((itemProductId) =>
+          newItems.some((item) => item.productId === itemProductId)
+        )
+      );
+    } catch (error) {
+      console.error("카트 아이템 삭제에 실패했습니다.", error);
+    }
+  };
+
   // 수량 변경 핸들러
-  const handleItemCountChange = (id, newCount) => {
+  const handleItemCountChange = (productId, newCount) => {
     setItems(
       items.map((item) =>
-        item.id === id ? { ...item, count: newCount } : item
+        item.productId === productId ? { ...item, quantity: newCount } : item
       )
     );
   };
 
   function handlePurchase() {
-    console.log("구매하기 버튼이 클릭되었습니다.");
+    // 체크된 아이템들만 필터링
+    const checkedItemsInfo = items.filter((item) =>
+      checkedItems.includes(item.productId)
+    );
+
+    // 선택된 상품이 없을 경우 alert 띄움
+    if (checkedItemsInfo.length === 0) {
+      alert("상품을 선택해주세요");
+      return;
+    }
+
+    // 모든 정보를 하나의 객체로 모음
+    const purchaseInfo = {
+      items: checkedItemsInfo,
+      totalPrice: totalPrice,
+      deliveryPrice: delieveryPrice,
+      finalPrice: totalPrice + delieveryPrice,
+    };
+
+    console.log(purchaseInfo);
+    setPurchaseInfo(purchaseInfo);
+    navigate("/orders");
   }
 
-  const handleItemCheckChange = (id, checked) => {
+  const handleItemCheckChange = (productId, checked) => {
     if (checked) {
-      setCheckedItems([...checkedItems, id]);
+      setCheckedItems([...checkedItems, productId]);
     } else {
-      setCheckedItems(checkedItems.filter((itemId) => itemId !== id));
+      setCheckedItems(
+        checkedItems.filter((itemProductId) => itemProductId !== productId)
+      );
     }
   };
 
@@ -65,10 +97,20 @@ function CartPage() {
     if (isAllChecked) {
       setCheckedItems([]);
     } else {
-      setCheckedItems(items.map((item) => item.id));
+      setCheckedItems(items.map((item) => item.productId));
     }
     setIsAllChecked(!isAllChecked);
   };
+
+  useEffect(() => {
+    let sum = 0;
+    items.forEach((item) => {
+      if (checkedItems.includes(item.productId)) {
+        sum += item.unitPrice * item.quantity;
+      }
+    });
+    setTotalPrice(sum);
+  }, [items, checkedItems]);
 
   useEffect(() => {
     setIsAllChecked(items.length !== 0 && items.length === checkedItems.length);
@@ -100,18 +142,19 @@ function CartPage() {
       <div className="cart_item-list">
         {items.map((item) => (
           <CartItem
-            key={item.id}
+            key={item.productId}
             item={item}
             onCountChange={handleItemCountChange}
-            checked={checkedItems.includes(item.id)}
+            checked={checkedItems.includes(item.productId)}
             onCheckChange={handleItemCheckChange}
+            onDelete={handleItemDelete}
           />
         ))}
       </div>
       <TotalPrice
-        totalItemPrice={2682700}
-        deliveryPrice={2500}
-        totalPrice={2685200}
+        totalItemPrice={totalPrice}
+        deliveryPrice={delieveryPrice}
+        totalPrice={totalPrice + delieveryPrice}
       />
       <PurchaseButton onClick={handlePurchase} />
     </div>
