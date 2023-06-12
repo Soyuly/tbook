@@ -146,7 +146,10 @@ function MainPage(props) {
               className="main-logo-image"
             />
 
+            <div style={{ display: "flex" }}>
+
             <div className="main_item_icon">
+
               <BsRobot
                 className="item_filter_icon"
                 onClick={() => navigate("/recommend")}

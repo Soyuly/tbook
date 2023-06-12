@@ -1,32 +1,38 @@
 .mypage {
-  padding-left: 20%;
-  padding-right: 20%;
+  box-sizing: border-box;
+  padding: 0 2rem;
   /* fotter 하단 고정 */
   height: auto;
+  width: 100%;
   min-height: 100%;
   padding-bottom: 1vh;
 }
 
-@media screen and (min-width: 1224px) {
+.mypage_container {
+  width: 100%;
+  margin: 2rem 1rem;
+}
+
+/* @media screen and (min-width: 1224px) {
   .mypage {
     padding-left: 30% !important;
     padding-right: 30% !important;
   }
 }
 
-/* 1000보다이하 */
-@media screen and (max-width: 1224px) {
+1000보다이하 @media screen and (max-width: 1224px) {
   .mypage {
     padding-left: 5% !important;
     padding-right: 5% !important;
   }
-}
+} */
 
 .user_info_container {
   /* 16px */
-  padding-left: 1rem;
-  padding-right: 1rem;
+
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .user_info-content {
@@ -34,13 +40,16 @@
 }
 
 .user_info-email {
-  font-size: 10px;
+  font-size: 13px;
+  font-family: "Pretendard";
+  font-weight: 400;
   margin-bottom: 0.3rem;
 }
 
 .user_info-name {
   /* flex-direction 설정해줘야 했음*/
-  font-size: 25px;
+  font-family: "Pretendard";
+  font-size: 2rem;
   display: flex;
   flex-direction: row;
   align-items: flex-end;
@@ -51,8 +60,8 @@
 }
 
 .user_info-logout-btn {
-  margin-left: auto;
-  font-size: 13px;
+  font-family: "NanumSquareNeoLight";
+  font-size: 17px;
   color: #989898;
   cursor: pointer;
 }
