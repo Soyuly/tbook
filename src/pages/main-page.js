@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import "../assets/css/itemMain.css";
 import { RiAccountCircleLine } from "react-icons/ri";
-import { BiLogOut } from "react-icons/bi";
+import { BiLogIn, BiLogOut } from "react-icons/bi";
 import { AiTwotoneFilter, AiOutlineFilter } from "react-icons/ai";
 import { AiTwotoneShopping } from "react-icons/ai";
 import { BsRobot } from "react-icons/bs";
@@ -153,6 +153,11 @@ function MainPage(props) {
               />
 
               {!getCookie("access_token") ? (
+                <BiLogIn
+                  className="item_filter_icon"
+                  onClick={() => navigate("/login")}
+                ></BiLogIn>
+              ) : (
                 <RiAccountCircleLine
                   className="item_filter_icon"
                   onClick={() => navigate("/login")}

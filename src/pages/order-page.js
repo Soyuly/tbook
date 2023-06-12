@@ -30,16 +30,6 @@ function OrderPage() {
     (sum, item) => sum + item.quantity,
     0
   );
-  // const purchaseInfo = useRecoilValue(purchaseInfoState);
-
-  const getOrderInfo = () => {
-    const orderInfo = {
-      ...order,
-      totalPaymentAmount,
-    };
-
-    console.log(orderInfo);
-  };
 
   const handlePaymentMethodChange = (method) => {
     setOrder((prevOrder) => ({ ...prevOrder, paymentMethod: method }));
@@ -59,12 +49,6 @@ function OrderPage() {
       navigate("/");
     }
   };
-
-  // useEffect(() => {
-  //   if (purchaseInfo) {
-  //     setOrder(purchaseInfo);
-  //   }
-  // }, [purchaseInfo]);
 
   useEffect(() => {
     getMyProfile()

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import "../assets/css/mypage/index.css";
 import "../assets/css/mypage/middle_wrapper.css";
@@ -14,14 +14,27 @@ import {
   TrashBinOutline,
   ConstructOutline,
 } from "react-ionicons";
+import { removeCookie } from "../utils/cookie";
+import { getMyProfile } from "../apis/get_my_profile-api";
 
 function MyPage() {
   const userEmail = "gildong@naver.com"; // 변경 필요
   const userName = "전병규"; // 변경 필요
   const navigate = useNavigate();
+  const [userInfo, setUserInfo] = useState({
+    name: "",
+    email: "",
+  });
 
-  //TODO userId
-  useEffect(() => {}, []);
+  useEffect(() => {
+    getMyProfile()
+      .then((res) => {
+        setUserInfo(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const handleBackIconClick = () => {
     // 뒤로가기 로직
@@ -29,6 +42,14 @@ function MyPage() {
 
   const handleLogoutClick = () => {
     // 로그아웃 로직
+    removeCookie("access_token");
+    localStorage.removeItem("userId");
+
+    // 알림 처리
+    alert("로그아웃이 완료되었습니다.");
+
+    // "/"로 이동
+    navigate("/");
   };
 
   const handleAddressSettingClick = () => {
@@ -46,15 +67,15 @@ function MyPage() {
   return (
     <div className="container">
       <header>
-        <AppBar appBarName={"마이페이지"} />
+        <AppBar appBarName={"마이페이지"} navigateTo={"/"} />
       </header>
 
       <div className="mypage">
         <div className="user_info_container">
           <div className="user_info-content">
-            <div className="user_info-email">{userEmail}</div>
+            <div className="user_info-email">{userInfo.email}</div>
             <div className="user_info-name">
-              {userName}
+              {userInfo.name}
               <span>&nbsp;&nbsp;고객님</span>
             </div>
           </div>
@@ -71,7 +92,6 @@ function MyPage() {
         </div>
         <div className="order_list" onClick={handleOrderListClick}>
           <i className="fa-regular fa-rectangle-list fa-xl"></i>
-          {/* //TODO userId */}
           <div
             onClick={() =>
               navigate("/orderInfo/" + localStorage.getItem("userId"))

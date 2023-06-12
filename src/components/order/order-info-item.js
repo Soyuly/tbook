@@ -16,10 +16,10 @@ function OrderInfoItem({
         <div className="order-info-item-title">{productName}</div>
         <div className="order-info-item-madeby">제조사: {productMadeBy}</div>
         <div className="order-info-item-price-quantity">
-          {unitPrice}&nbsp; 원 / {quantity}&nbsp;개
+          {unitPrice.toLocaleString()}&nbsp; 원 / {quantity}&nbsp;개
         </div>
         <div className="order-info-item-total-price">
-          총 가격 : {unitPrice * quantity}&nbsp;원
+          총 가격 : {(unitPrice * quantity).toLocaleString()}&nbsp;원
         </div>
       </div>
     </div>
