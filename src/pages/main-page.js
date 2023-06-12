@@ -146,7 +146,7 @@ function MainPage(props) {
               className="main-logo-image"
             />
 
-            <div>
+            <div className="main_item_icon">
               <BsRobot
                 className="item_filter_icon"
                 onClick={() => navigate("/recommend")}
@@ -158,25 +158,12 @@ function MainPage(props) {
                   onClick={() => navigate("/login")}
                 ></BiLogIn>
               ) : (
-                <RiAccountCircleLine
-                  className="item_filter_icon"
-                  onClick={() => navigate("/login")}
-                />
-              ) : (
                 <div>
                   <RiAccountCircleLine
                     className="item_filter_icon"
                     onClick={() =>
                       navigate("/mypage/" + localStorage.getItem("userId"))
                     }
-                  />
-                  <BiLogOut
-                    className="item_filter_icon"
-                    onClick={() => {
-                      removeCookie("access_token");
-                      localStorage.removeItem("userId");
-                      window.location.reload();
-                    }}
                   />
                 </div>
               )}
