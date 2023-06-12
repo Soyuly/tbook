@@ -36,10 +36,6 @@ function MyPage() {
       });
   }, []);
 
-  const handleBackIconClick = () => {
-    // 뒤로가기 로직
-  };
-
   const handleLogoutClick = () => {
     // 로그아웃 로직
     removeCookie("access_token");
@@ -54,14 +50,12 @@ function MyPage() {
 
   const handleAddressSettingClick = () => {
     // 주소 설정 로직
-  };
-
-  const handleOrderListClick = () => {
-    // 주문 목록 로직
+    alert("추후 오픈 예정입니다.");
   };
 
   const handleSettingItemClick = () => {
     // 설정 항목 클릭 로직
+    alert("추후 오픈 예정입니다.");
   };
 
   return (
@@ -90,7 +84,7 @@ function MyPage() {
           <i className="fa-solid fa-location-dot fa-xl"> </i>
           <div>주소 설정</div>
         </div>
-        <div className="order_list" onClick={handleOrderListClick}>
+        <div className="order_list">
           <i className="fa-regular fa-rectangle-list fa-xl"></i>
           <div
             onClick={() =>
