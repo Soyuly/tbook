@@ -37,36 +37,39 @@ function LoginPage() {
    * 구글 로그인 페이지를 여는 함수
    */
   function openGoogleLoginPage() {
-    localStorage.setItem("provider", "google");
-    const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
-    const redirectUri = "http://localhost:3000/login";
-    window.open(
-      `https://accounts.google.com/o/oauth2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&&scope=email%20profile`,
-      "_self"
-    );
+    alert("구글 로그인 점검으로 추후 오픈 예정입니다.");
+    // localStorage.setItem("provider", "google");
+    // const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+    // const redirectUri = "http://localhost:3000/login";
+    // window.open(
+    //   `https://accounts.google.com/o/oauth2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&&scope=email%20profile`,
+    //   "_self"
+    // );
   }
 
   function openKakaoLoginPage() {
-    localStorage.setItem("provider", "kakao");
-    const clientId = process.env.REACT_APP_KAKAO_CLIENT_ID;
-    const redirectUri = "http://localhost:3000/login";
+    alert("카카오 로그인 점검으로 추후 오픈 예정입니다.");
+    // localStorage.setItem("provider", "kakao");
+    // const clientId = process.env.REACT_APP_KAKAO_CLIENT_ID;
+    // const redirectUri = "http://localhost:3000/login";
 
-    window.open(
-      `https://kauth.kakao.com/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code`,
-      "_self"
-    );
+    // window.open(
+    //   `https://kauth.kakao.com/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code`,
+    //   "_self"
+    // );
   }
 
   //https://devtalk.kakao.com/t/401-unauthorized-no-body/127851/5
   function openNaverLoginPage() {
-    localStorage.setItem("provider", "naver");
-    const clientId = process.env.REACT_APP_NAVER_CLIENT_ID;
-    const redirectUri = "http://localhost:3000/login?";
-    const state = Math.random().toString(36);
-    window.open(
-      `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}$state=${state}`,
-      "_self"
-    );
+    alert("네이버 로그인 점검으로 추후 오픈 예정입니다.");
+    // localStorage.setItem("provider", "naver");
+    // const clientId = process.env.REACT_APP_NAVER_CLIENT_ID;
+    // const redirectUri = "http://localhost:3000/login?";
+    // const state = Math.random().toString(36);
+    // window.open(
+    //   `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}$state=${state}`,
+    //   "_self"
+    // );
   }
 
   async function login() {

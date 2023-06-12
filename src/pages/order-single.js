@@ -14,12 +14,29 @@ import { useNavigate } from "react-router-dom";
 
 import { onPaymentButtonClick } from "../utils/payment";
 import purshaseSingleInfoState from "../store/order/purshaseSingleInfoState";
+import { getMyProfile } from "../apis/get_my_profile-api";
 
 function OrderSinglePage() {
   // const [order, setOrder] = useRecoilState(orderState);
   const [order, setOrder] = useRecoilState(purshaseSingleInfoState);
   //   const totalPaymentAmount = useRecoilValue(totalPaymentAmountState);
   const navigate = useNavigate();
+  const [userInfo, setUserInfo] = useState({
+    name: "",
+    address: "",
+    phone: "",
+  });
+
+  useEffect(() => {
+    getMyProfile()
+      .then((res) => {
+        setUserInfo(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   // const purchaseInfo = useRecoilValue(purchaseInfoState);
 
   //   const getOrderInfo = () => {
@@ -39,8 +56,8 @@ function OrderSinglePage() {
     const paymentSuccessful = await onPaymentButtonClick(
       order.paymentMethod,
       Math.floor(Math.random() * 100000) + 1,
-      200,
-      "테스트 제품",
+      order.unitPrice + 2500,
+      order.productName,
       order,
       "single"
     );
@@ -65,14 +82,14 @@ function OrderSinglePage() {
           <span>성명·연락처</span>
           <div className="order_user-name">
             {/* {order.userInfo.name} / {order.userInfo.phone} */}
-            홍길동 / 010-1234-1234
+            {userInfo.name} / {userInfo.phone}
           </div>
         </div>
         <div className="order_user-address">
           <span>주소</span>
           <div className="order_user-address-detail">
             {/* {order.userInfo.address} */}
-            진주시 테스트
+            {userInfo.address}
           </div>
         </div>
       </div>
@@ -112,7 +129,7 @@ function OrderSinglePage() {
           <div className="payment_price-total_delivery-container">
             총 배송비
             <span>원</span>
-            <span className="payment_price-total_delivery">2500</span>
+            <span className="payment_price-total_delivery">2,500</span>
           </div>
           <div className="payment_price-total-container">
             총 결제 금액

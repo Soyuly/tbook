@@ -162,6 +162,7 @@ function MainPage(props) {
                   className="item_filter_icon"
                   onClick={() => {
                     removeCookie("access_token");
+                    localStorage.removeItem("userId");
                     window.location.reload();
                   }}
                 />
@@ -179,12 +180,15 @@ function MainPage(props) {
                 />
               )}
 
-              {/* //TODO userId */}
-              <AiTwotoneShopping
-                className="shopping_cart"
-                style={{ cursor: "pointer" }}
-                // onClick={() => navigate("/cart/" + "1")}
-              />
+              {localStorage.getItem("userId") && (
+                <AiTwotoneShopping
+                  className="shopping_cart"
+                  style={{ cursor: "pointer" }}
+                  onClick={() =>
+                    navigate("/cart/" + localStorage.getItem("userId"))
+                  }
+                />
+              )}
             </div>
           </div>
         </div>

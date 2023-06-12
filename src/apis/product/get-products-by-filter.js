@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const REACT_APP_SPRING_BOOT_API_URL = process.env.REACT_APP_SPRING_BOOT_API_URL;
+const REACT_APP_SPRING_BOOT_API_URL = process.env.REACT_APP_PRODUCT_API_URL;
 
 export async function getProductsByFilter(pageNum, madeBy, price, weight) {
   try {
-    let url = `${REACT_APP_SPRING_BOOT_API_URL}/product-service/products/filter/?page=${pageNum}`;
+    let url = `${REACT_APP_SPRING_BOOT_API_URL}/products/filter/?page=${pageNum}`;
 
     if (madeBy.length !== 0) {
       for (let item of madeBy) {

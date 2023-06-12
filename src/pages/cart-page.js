@@ -22,7 +22,7 @@ function CartPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getProductCartByUserId(1).then((res) => {
+    getProductCartByUserId(localStorage.getItem("userId")).then((res) => {
       console.log(res.data.list);
       setItems(res.data.list);
     });

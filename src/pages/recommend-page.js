@@ -5,7 +5,7 @@ import { useState } from "react";
 import { productRecommendApi } from "../apis/product-recommend";
 import { useNavigate } from "react-router-dom";
 import { SyncLoader } from "react-spinners";
-
+import { IoIosArrowBack } from "react-icons/io";
 function RecommendPage(props) {
   const navigate = useNavigate();
   const [current, setCurrent] = useState(0);
@@ -50,9 +50,10 @@ function RecommendPage(props) {
       <div className="recommend-header">
         <div className="headerUp">
           <div className="preButton">
-            <img
-              src="/assets/item/Left Actionable.png"
-              alt="이전버튼"
+            <IoIosArrowBack
+              size="1.8rem"
+              className="arrow-icon"
+              style={{ cursor: "pointer" }}
               onClick={() => navigate(-1)}
             />
           </div>
