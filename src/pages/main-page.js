@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import "../assets/css/itemMain.css";
 import { RiAccountCircleLine } from "react-icons/ri";
-import { BiLogOut } from "react-icons/bi";
+import { BiLogIn, BiLogOut } from "react-icons/bi";
 import { AiTwotoneFilter, AiOutlineFilter } from "react-icons/ai";
 import { AiTwotoneShopping } from "react-icons/ai";
 import { BsRobot } from "react-icons/bs";
@@ -147,16 +147,19 @@ function MainPage(props) {
             />
 
             <div style={{ display: "flex" }}>
+
+            <div className="main_item_icon">
+
               <BsRobot
                 className="item_filter_icon"
                 onClick={() => navigate("/recommend")}
               />
 
               {!getCookie("access_token") ? (
-                <RiAccountCircleLine
+                <BiLogIn
                   className="item_filter_icon"
                   onClick={() => navigate("/login")}
-                />
+                ></BiLogIn>
               ) : (
                 <div>
                   <RiAccountCircleLine
@@ -164,14 +167,6 @@ function MainPage(props) {
                     onClick={() =>
                       navigate("/mypage/" + localStorage.getItem("userId"))
                     }
-                  />
-                  <BiLogOut
-                    className="item_filter_icon"
-                    onClick={() => {
-                      removeCookie("access_token");
-                      localStorage.removeItem("userId");
-                      window.location.reload();
-                    }}
                   />
                 </div>
               )}

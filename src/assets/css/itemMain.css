@@ -10,6 +10,10 @@
   margin-bottom: 1rem;
 }
 
+.main_item_icon {
+  display: flex;
+}
+
 .main-logo-image {
   width: 3rem;
   height: 3rem;
