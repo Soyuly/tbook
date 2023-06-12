@@ -1,0 +1,30 @@
+.order-info-item-container {
+  display: flex;
+}
+
+.order-info-item-info {
+  margin: 0.5rem 0 2.5rem 1.5rem;
+  line-height: 1.2rem;
+  height: 100%;
+  /* font-family: "NanumSquareNeoRegular"; */
+}
+
+.order-info-item-title {
+  font-size: 12px;
+  font-weight: bold;
+}
+.order-info-item-madeby {
+  font-family: "NanumSquareNeoRegular";
+  font-size: 10px;
+  color: #767676;
+}
+.order-info-item-price-quantity {
+  font-family: "NanumSquareNeoRegular";
+  font-size: 10px;
+  margin-top: 2rem;
+}
+
+.order-info-item-total-price {
+  font-family: "NanumSquareNeoRegular";
+  font-size: 12px;
+}

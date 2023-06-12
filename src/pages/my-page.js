@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import "../assets/css/mypage/index.css";
 import "../assets/css/mypage/middle_wrapper.css";
 import "../assets/css/mypage/mypage.css";
 import "../assets/css/mypage/setting_list.css";
 import AppBar from "../components/common/app-bar.js";
+import { useNavigate } from "react-router-dom";
 import {
   ListOutline,
   PersonCircleOutline,
@@ -17,6 +18,10 @@ import {
 function MyPage() {
   const userEmail = "gildong@naver.com"; // 변경 필요
   const userName = "전병규"; // 변경 필요
+  const navigate = useNavigate();
+
+  //TODO userId
+  useEffect(() => {}, []);
 
   const handleBackIconClick = () => {
     // 뒤로가기 로직
@@ -66,7 +71,8 @@ function MyPage() {
         </div>
         <div className="order_list" onClick={handleOrderListClick}>
           <i className="fa-regular fa-rectangle-list fa-xl"></i>
-          <div>주문 목록</div>
+          {/* //TODO userId */}
+          <div onClick={() => navigate("/orderInfo/" + "1")}>주문 목록</div>
         </div>
       </div>
 

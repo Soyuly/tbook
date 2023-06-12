@@ -46,6 +46,8 @@ function ItemDetailPage() {
     const purchaseSingleInfo = {
       productId: product.productId,
       productName: product.productName,
+      productMadeBy: product.productMadeBy,
+      productImage: product.productImage,
       quantity: 1,
       unitPrice: product.productPrice,
     };
