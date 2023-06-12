@@ -160,18 +160,25 @@ function MainPage(props) {
               ) : (
                 <RiAccountCircleLine
                   className="item_filter_icon"
-                  onClick={() =>
-                    navigate("/mypage/" + localStorage.getItem("userId"))
-                  }
+                  onClick={() => navigate("/login")}
                 />
-                // <BiLogOut
-                //   className="item_filter_icon"
-                //   onClick={() => {
-                // removeCookie("access_token");
-                // localStorage.removeItem("userId");
-                // window.location.reload();
-                // }}
-                // />
+              ) : (
+                <div>
+                  <RiAccountCircleLine
+                    className="item_filter_icon"
+                    onClick={() =>
+                      navigate("/mypage/" + localStorage.getItem("userId"))
+                    }
+                  />
+                  <BiLogOut
+                    className="item_filter_icon"
+                    onClick={() => {
+                      removeCookie("access_token");
+                      localStorage.removeItem("userId");
+                      window.location.reload();
+                    }}
+                  />
+                </div>
               )}
 
               {isShow ? (
