@@ -16,6 +16,7 @@ import CartPage from "./pages/cart-page";
 import OrderPage from "./pages/order-page";
 import MyPage from "./pages/my-page";
 import OrderSinglePage from "./pages/order-single";
+import OrderInfo from "./pages/orderInfo";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -34,7 +35,8 @@ root.render(
           <Route path="/cart/:userId" element={<CartPage />} />
           <Route path="/orders" element={<OrderPage />} />
           <Route path="/order" element={<OrderSinglePage />} />
-          <Route path="/mypage" element={<MyPage />} />
+          <Route path="/orderInfo/:userId" element={<OrderInfo />} />
+          <Route path="/mypage/:userId" element={<MyPage />} />
         </Routes>
       </BrowserRouter>
     </RecoilRoot>
