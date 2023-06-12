@@ -153,19 +153,22 @@ function MainPage(props) {
               />
 
               {!getCookie("access_token") ? (
+                <></>
+              ) : (
                 <RiAccountCircleLine
                   className="item_filter_icon"
-                  onClick={() => navigate("/login")}
+                  onClick={() =>
+                    navigate("/mypage/" + localStorage.getItem("userId"))
+                  }
                 />
-              ) : (
-                <BiLogOut
-                  className="item_filter_icon"
-                  onClick={() => {
-                    removeCookie("access_token");
-                    localStorage.removeItem("userId");
-                    window.location.reload();
-                  }}
-                />
+                // <BiLogOut
+                //   className="item_filter_icon"
+                //   onClick={() => {
+                //     removeCookie("access_token");
+                //     localStorage.removeItem("userId");
+                //     window.location.reload();
+                //   }}
+                // />
               )}
 
               {isShow ? (
