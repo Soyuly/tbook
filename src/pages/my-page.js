@@ -72,7 +72,13 @@ function MyPage() {
         <div className="order_list" onClick={handleOrderListClick}>
           <i className="fa-regular fa-rectangle-list fa-xl"></i>
           {/* //TODO userId */}
-          <div onClick={() => navigate("/orderInfo/" + "1")}>주문 목록</div>
+          <div
+            onClick={() =>
+              navigate("/orderInfo/" + localStorage.getItem("userId"))
+            }
+          >
+            주문 목록
+          </div>
         </div>
       </div>
 
