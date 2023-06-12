@@ -21,11 +21,6 @@ function ItemDetailPage() {
   const [cartLink, setCartLink] = useState("");
   const setPurchaseSingleInfo = useSetRecoilState(purshaseSingleInfoState);
 
-  //TODO userId
-  // useEffect(() => {
-  //   // setCartLink("/cart" + 1);
-  // }, []);
-
   /**
    * 현재 날짜 가져오기
    */
@@ -84,7 +79,9 @@ function ItemDetailPage() {
   const handleModalClick = (productId) => {
     setIsOpen(true);
 
-    addProductCart(1, productId).then((res) => console.log(res));
+    addProductCart(localStorage.getItem("userId"), productId).then((res) =>
+      console.log(res)
+    );
   };
   const handleClose = () => {
     setIsOpen(false);
@@ -109,10 +106,10 @@ function ItemDetailPage() {
               />
             </a>
           </div>
-          {/* TODO userId */}
+
           <div className="item_title">{product.productName}</div>
           <div className="shopping_cart">
-            <a href={"/cart/" + "1"}>
+            <a href={"/cart/" + localStorage.getItem("userId")}>
               <img src="/assets/item/shopping_cart.png" alt="장바구니" />
             </a>
           </div>

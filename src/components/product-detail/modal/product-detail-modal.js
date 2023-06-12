@@ -31,10 +31,10 @@ function ProductDetailModal({ isOpen, onClose }) {
         <div className="product-cart-modal-button-close" onClick={onClose}>
           닫기
         </div>
-        {/* TODO userId */}
+
         <div
           className="product-cart-modal-button-to-cart"
-          onClick={() => navigate("/cart/" + "1")}
+          onClick={() => navigate("/cart/" + localStorage.getItem("userId"))}
         >
           장바구니로 가기
         </div>
