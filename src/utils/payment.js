@@ -36,7 +36,7 @@ export const onPaymentButtonClick = (
       if (success) {
         // orderType에 따라 적절한 API 호출
         if (orderType === "single") {
-          createSingleItemOrder(1, items)
+          createSingleItemOrder(localStorage.getItem("userId"), items)
             .then(() => {
               alert("결제 성공");
               resolve(true);
@@ -46,7 +46,7 @@ export const onPaymentButtonClick = (
               resolve(false);
             });
         } else if (orderType === "multiple") {
-          createItemOrder(1, items)
+          createItemOrder(localStorage.getItem("userId"), items)
             .then(() => {
               alert("결제 성공");
               resolve(true);
