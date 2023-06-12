@@ -44,7 +44,7 @@ function MyPage() {
   };
 
   return (
-    <div className="container">
+    <div className="mypage_container">
       <header>
         <AppBar appBarName={"마이페이지"} />
       </header>

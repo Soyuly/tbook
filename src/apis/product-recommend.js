@@ -4,7 +4,7 @@ const REACT_APP_FAST_API_URL = process.env.REACT_APP_FAST_API_URL;
 
 export async function productRecommendApi(userHistory) {
   try {
-    const response = await axios.post(
+    const response = await axios.get(
       `${REACT_APP_FAST_API_URL}/api/v1/product/recommend`,
       {
         ids: userHistory,
